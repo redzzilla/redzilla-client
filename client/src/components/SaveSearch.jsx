@@ -15,7 +15,7 @@ const SaveSearch = (props) => {
     const [{auth, user},{setUser}] = useSession()
 
     const handleClickSaveSearch = () => {
-        if(auth){
+        if (auth) {
             setSuccessLoading(true)
             setDropIsOpen(true)
 
@@ -24,7 +24,7 @@ const SaveSearch = (props) => {
                 if(JSON.stringify(item) === JSON.stringify(filterStatus)) checkInclude = false;
             })
 
-            if(checkInclude)
+            if (checkInclude)
             {
                 const newsearch = [filterStatus, ...user.savedSearch ];
                 const newUserData = {...user, savedSearch: newsearch }
@@ -45,7 +45,7 @@ const SaveSearch = (props) => {
     useEffect(() => {
         window.addEventListener('click', handleOutClick);
         return () => window.removeEventListener('click', handleOutClick);
-    },[dropIsOpen])
+    }, [dropIsOpen])
 
     return (
         <>

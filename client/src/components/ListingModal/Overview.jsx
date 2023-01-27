@@ -47,7 +47,7 @@ const OverviewDetail = (props) => {
     useEffect(() => {
         let nextDay = new Date();
         const newArray=[];
-        for(let i=0;i<7;i++){
+        for(let i = 0; i < 7; i++) {
             nextDay.setDate(new Date().getDate() + i)
             const itemObj = {
                 day : nextDay.getDay(),
@@ -58,7 +58,7 @@ const OverviewDetail = (props) => {
             newArray.push(itemObj)
         }
         setDayAndWeek(newArray)
-    },[])
+    }, [])
 
     const preferedTime = [];
     for(let i=9;i<=18;i++){
@@ -151,7 +151,7 @@ const OverviewDetail = (props) => {
                                 <SwiperSlide key={index}>
                                     <div className={`w50 whiteBtn btn w100 ${preferedDate === item ? 'active' : ''}`} onClick={() => handleClickPreferedDate(item)}>
                                         {WEEK_ARRAY[item.day]} <br />
-                                        {MONTH_ARRAY[item.month-1] + ' ' + item.date}
+                                        {MONTH_ARRAY[item.month] + ' ' + item.date}
                                     </div>
                                 </SwiperSlide>
                             )

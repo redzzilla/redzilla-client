@@ -15,7 +15,7 @@ const ListingModal = (props) => {
   const [galleryData, setGalleryData] = useState(null)
 
   useEffect(() => {
-    async function fetchData(){
+    async function fetchData() {
       let url = detailEndpoint(itemId)
       let res = await fetch(url);
       let result = await res.json();

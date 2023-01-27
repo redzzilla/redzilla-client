@@ -1,7 +1,6 @@
 import { useState, useRef, useEffect } from 'react';
 import Modal from 'react-modal';
 import { ItemBubbleContent } from './ItemBubbleContent'
-import { useWindowSize } from '../hooks/useWindowSize'
 import { ModalStyle } from './Common/Modal.Style';
 import './ItemBubble.scss';
 
@@ -18,10 +17,10 @@ const ListingModal = checkFile() ? checkFile().default : null;
 
 const ItemBubble = ({ item, duplicatedItems }) => {
   const [isInfoOpen, setIsInfoOpen] = useState(false)
+  const [isInfoClick, setIsInfoClick] = useState(false);
   const modalRef = useRef(null)
   const [modalIsOpen, setModalIsOpen] = useState(false)
   const [selectedItem, setSelectedItem] = useState([])
-  const { width } = useWindowSize();
 
   const numFormatter = num => {
     if (num > 999 && num < 1000000) {
@@ -33,15 +32,28 @@ const ItemBubble = ({ item, duplicatedItems }) => {
     }
   }
 
-  const openInfo = () => setIsInfoOpen(true)
-  const closeInfo = () => setIsInfoOpen(false)
-
+  const openInfo = () => {
+    if (!isInfoClick) {
+      setIsInfoOpen(true)
+    }
+  }
+  const closeInfo = () => {
+    if (!isInfoClick) {
+      setTimeout(() => {
+        setIsInfoOpen(false)
+      }, 100);
+    }
+  }
+  const pointInfo = () => {
+    setIsInfoClick(true)
+    setIsInfoOpen(true)
+  }
   const openModal = (clickedItem) => {
     setSelectedItem(clickedItem)
     setModalIsOpen(true)
   }
 
-  const closeModal = () =>{
+  const closeModal = () => {
     setModalIsOpen(false)
   }
 
@@ -52,55 +64,29 @@ const ItemBubble = ({ item, duplicatedItems }) => {
 
   const handleOutClick = (e) => {
     if(modalRef?.current?.contains(e.target)) return
+    setIsInfoClick(false);
     setIsInfoOpen(false);
 }
 
   return (
     <>
       <div
-        style={{
-          minWidth: 48,
-          width: "max-content",
-          height: "auto",
-          backgroundColor: item.isSecondaryResult ? "gray" : "green",
-          padding: 2,
-          fontSize: 12,
-          color: "#ffffff",
-          textAlign: "center"
-        }}
         ref={modalRef}
-        onClick={openInfo}
+        onClick={pointInfo}
         onMouseOut={closeInfo}
         onMouseOver={openInfo}
-        className="marker"
+        className= {item.isSecondaryResult ? "marker_grey" : "marker_green"}
       >
         {duplicatedItems.length > 1
           ? duplicatedItems.length + " Listings"
           : numFormatter(item.displayPrice)}
 
-        { width > 700 &&
-          <div
-            className="popOutDiv"
-            style={{ display: isInfoOpen ? "block" : "none" }}
-          >
-            <ItemBubbleContent openModal={openModal} duplicatedItems={duplicatedItems} isInfoOpen={isInfoOpen}/>
-          </div>
-        }
-        { width<=700 &&
-            <Modal
-              isOpen={isInfoOpen}
-              style={{
-                overlay: ModalStyle.overlay,
-                content: {
-                  ...ModalStyle.content,
-                  width: '400px',
-                  overflow: 'auto'
-                }
-              }}
-            >
-              <ItemBubbleContent openModal={openModal} duplicatedItems={duplicatedItems} isInfoOpen={isInfoOpen}/>
-            </Modal>
-        }
+        <div
+          className="popOutDiv"
+          style={{ display: isInfoClick || isInfoOpen ? "block" : "none" }}
+        >
+          <ItemBubbleContent openModal={openModal} duplicatedItems={duplicatedItems} isInfoOpen={isInfoOpen}/>
+        </div>
       </div>
 
       { ListingModal &&
