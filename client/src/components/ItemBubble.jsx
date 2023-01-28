@@ -37,13 +37,6 @@ const ItemBubble = ({ item, duplicatedItems }) => {
       setIsInfoOpen(true)
     }
   }
-  const closeInfo = () => {
-    if (!isInfoClick) {
-      setTimeout(() => {
-        setIsInfoOpen(false)
-      }, 100);
-    }
-  }
   const pointInfo = () => {
     setIsInfoClick(true)
     setIsInfoOpen(true)
@@ -58,11 +51,11 @@ const ItemBubble = ({ item, duplicatedItems }) => {
   }
 
   useEffect(() => {
-      window.addEventListener('click', handleOutClick);
-      return () => window.removeEventListener('click', handleOutClick);
-  },[])
+      window.addEventListener('mouseover', handleOut);
+      return () => window.removeEventListener('mouseover', handleOut);
+  }, [])
 
-  const handleOutClick = (e) => {
+  const handleOut = (e) => {
     if(modalRef?.current?.contains(e.target)) return
     setIsInfoClick(false);
     setIsInfoOpen(false);
@@ -73,9 +66,8 @@ const ItemBubble = ({ item, duplicatedItems }) => {
       <div
         ref={modalRef}
         onClick={pointInfo}
-        onMouseOut={closeInfo}
         onMouseOver={openInfo}
-        className= {item.isSecondaryResult ? "marker_grey" : "marker_green"}
+        className= {item.isSecondaryResult ? (!isInfoOpen ? "marker_grey" : "marker_purple") : (!isInfoOpen ? "marker_green" : "marker_purple")}
       >
         {duplicatedItems.length > 1
           ? duplicatedItems.length + " Listings"

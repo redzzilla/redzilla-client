@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/img-redundant-alt */
 import React, { useState, useEffect, useRef } from 'react'
 import { useSession } from '../../contexts/SessionContext'
 import DropDown from '../Common/DropDown';

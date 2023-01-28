@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
-// import { BsSearch } from 'react-icons/bs';
 import Select from 'react-select'
-import { FaMapMarkerAlt } from "react-icons/fa";
+import {FaMapMarkerAlt} from 'react-icons/fa'
 
 import './SearchForm.scss';
 
@@ -14,28 +13,49 @@ const SearchForm = (props) => {
     const [options, setOptions] = useState([])
     const [value, setValue] = useState('');
 
-    // const handleSubmit = (e) => {
-    //     e.preventDefault();
-    //     setFilterStatus({
-    //         ...filterStatus,
-    //         keywords : value
-    //     })
-    // }
+    const currLocation = [{
+        'value': '92101',
+        'label': <div><FaMapMarkerAlt/><span>   Current Location</span></div>
+    }]
 
-    const handlePosition = () => {
-        setFilterStatus({
-            ...filterStatus,
-            keywords : value
-        })
-    }
-
+    console.log(value);
     const handleChange = (e) => {
+        setValue(e.label)
         setFilterStatus({
             ...filterStatus,
             keywords : e.value
         })
-        setValue(e.target.value);
     }
+
+    const customStyles = {
+        control: (provided, state) => ({
+          ...provided,
+          minHeight: '34px',
+          height: '34px',
+          textOverflow: "ellipsis",
+          minWidth: "300px"
+        }),
+    
+        valueContainer: (provided, state) => ({
+          ...provided,
+          height: '32px',
+          padding: '0 5px',
+          textOverflow: "ellipsis",
+          fontSize: "14px"
+        }),
+    
+        input: (provided, state) => ({
+          ...provided,
+          margin: '0px',
+        }),
+        indicatorSeparator: state => ({
+          display: 'none',
+        }),
+        indicatorsContainer: (provided, state) => ({
+          ...provided,
+          height: '34px',
+        }),
+      };
 
     useEffect(() => {
         async function searchPosition() {
@@ -56,26 +76,18 @@ const SearchForm = (props) => {
             setOptions(temp)
         }
         searchPosition()
-        // setValue(filterStatus.keywords)
     }, [filterStatus]);
 
     return (
-        // <form action="#" onSubmit={handleSubmit} className='inlineInputContainer mr10'>
-        //     <input type="text" value={value} className='inputBox prevInputBox font12' id="keywords" onChange={handleChange}/>
-        //     <button type="submit" className='inlineNext'>
-        //         <BsSearch />
-        //     </button>
-        // </form>
         <>
-            <Select 
-                options={options}
+            <Select
+                inputValue={value}
+                onInputChange={setValue}
+                options={value ? options : currLocation}
                 onChange={handleChange}
-                style ={{ width: "100%", minWidth: "200px"}}
+                styles={customStyles}
                 placeholder = 'City, Neighborhood, ZIP, Address'
             />
-            <button className='floating-btn' onClick={handlePosition}>
-                <FaMapMarkerAlt/>&nbsp;Current Location
-            </button>
         </>
     )
 }

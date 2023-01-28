@@ -3,6 +3,7 @@
     left: -100px;
     z-index: 10;
     top:25px;
+    background-color: #ffffff;
 
     &:after {
         position: absolute;
@@ -15,7 +16,6 @@
         transform: translate(-50%, -50%) rotate(-45deg);
         width: 15px;
     }
-    
 }
 
 .popContainer {
@@ -67,24 +67,23 @@
     width: max-content;
     height: auto;
     background-color: grey;
-    padding: 2px 5px;
+    padding: 2px;
     font-size: 12px;
     color: #ffffff;
     text-align: center;
     border-radius: 10px;
-}
-
-.marker_grey::after {
-    position: absolute;
-    border-left: 6px solid transparent;
-    border-right: 6px solid transparent;
-    border-top: 6px solid grey;
-    transform: translate(150%,30%);
-    z-index: 4;
-    content: "";
-    display: block;
-    height: 0;
-    width: 0;
+    &::after {
+        position: absolute;
+        border-left: 6px solid transparent;
+        border-right: 6px solid transparent;
+        border-top: 6px solid grey;
+        transform: translate(150%,30%);
+        z-index: 4;
+        content: "";
+        display: block;
+        height: 0;
+        width: 0;
+    }
 }
 
 .marker_green {
@@ -98,17 +97,43 @@
     color: #ffffff;
     text-align: center;
     border-radius: 10px;
+
+    &::after {
+        position: absolute;
+        border-left: 6px solid transparent;
+        border-right: 6px solid transparent;
+        border-top: 6px solid green;
+        transform: translate(150%,30%);
+        z-index: 4;
+        content: "";
+        display: block;
+        height: 0;
+        width: 0;
+    }
 }
 
-.marker_green::after {
+.marker_purple {
     position: absolute;
-    border-left: 6px solid transparent;
-    border-right: 6px solid transparent;
-    border-top: 6px solid green;
-    transform: translate(150%,30%);
-    z-index: 4;
-    content: "";
-    display: block;
-    height: 0;
-    width: 0;
+    min-width: 48px;
+    width: max-content;
+    height: auto;
+    background-color: purple;
+    padding: 2px;
+    font-size: 12px;
+    color: #ffffff;
+    text-align: center;
+    border-radius: 10px;
+
+    &::after {
+        position: absolute;
+        border-left: 6px solid transparent;
+        border-right: 6px solid transparent;
+        border-top: 6px solid purple;
+        transform: translate(150%,30%);
+        z-index: 4;
+        content: "";
+        display: block;
+        height: 0;
+        width: 0;
+    }
 }
