@@ -1,12 +1,12 @@
-import { useState } from 'react';
+import { useState, memo } from 'react';
 import GoogleMapReact from 'google-map-react';
 import { ItemBubble } from './ItemBubble';
 
-const GoogleMap = ({initialData, filterStatus}) => {
+const GoogleMap = ({initialData, filterStatus, currentLocation}) => {
 
     const [data, setData] = useState(initialData);
 
-    function mergeVisibleArea(oldData, newData) {
+    const mergeVisibleArea = (oldData, newData) => {
         let merge = [];
         let oldKeys = new Set(oldData.map(item => item.id));
         if(newData) {
@@ -27,7 +27,7 @@ const GoogleMap = ({initialData, filterStatus}) => {
             let position = new maps.LatLng(data[i].latitude, data[i].longitude);
             bounds.extend(position);
         }
-        maps.event.addListener(map, 'bounds_changed', function () {
+        maps.event.addListener(map, 'bounds_changed', () => {
             let bounds = map.getBounds();
             let ne = bounds.getNorthEast();
             let sw = bounds.getSouthWest();
@@ -50,16 +50,21 @@ const GoogleMap = ({initialData, filterStatus}) => {
                     ...myObj
                 })
             })
-                .then(response => response.json())
-                .then(newData => setData(mergeVisibleArea(data, newData)) )
-                .catch(error => console.log(error));
+            .then(response => response.json())
+            .then(newData => setData(mergeVisibleArea(data, newData)) )
+            .catch(error => console.log(error));
         });
         map.fitBounds(bounds);
     }
 
-
     const handleApiLoaded = async (map, maps) => {
         mergeDataFunction(map, maps);
+        let marker = new maps.Marker({
+            position: currentLocation,
+            map,
+            title: 'User Location'
+        })
+        marker.setMap(map)
         const result = await fetch('./ZIP_CODES.geojson')
         const geojson = await result.json();
         const filterData = geojson.features.find(item => parseInt(item.properties.ZIP) === parseInt(filterStatus.keywords));
@@ -89,12 +94,13 @@ const GoogleMap = ({initialData, filterStatus}) => {
     return data &&
     <GoogleMapReact
         yesIWantToUseGoogleMapApiInternals
-        bootstrapURLKeys={{ key: 'AIzaSyDy4vJLsIMYYK8_CyTGciCUtsA2_87DXWg', libraries: 'places' }}
-        zoom={15}
-        defaultCenter={[0,0]}
-        onGoogleApiLoaded={({ map, maps }) => handleApiLoaded(map, maps)}>
+        bootstrapURLKeys={{ key: "AIzaSyDy4vJLsIMYYK8_CyTGciCUtsA2_87DXWg", libraries: 'places' }}
+        defaultZoom={12}
+        defaultCenter={currentLocation}
+        onGoogleApiLoaded={({ map, maps }) => handleApiLoaded(map, maps)}
+    >
         {
-            data.map(function (item, i) {
+            data.map((item, i) => {
                 const duplicatedItems = data.filter(
                     checkItem => checkItem.latitude === item.latitude
                         && checkItem.longitude === item.longitude
@@ -112,4 +118,4 @@ const GoogleMap = ({initialData, filterStatus}) => {
 
 };
 
-export { GoogleMap };
+export default memo(GoogleMap);

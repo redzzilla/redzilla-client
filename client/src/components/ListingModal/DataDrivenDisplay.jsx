@@ -1,39 +1,29 @@
 import React from 'react'
+import metadata from './metadata.json'
 
 const DataDrivenDisplay = (props) => {
     const { data } = props
-
+    const arr = [];
+    for (const key in data) {
+        if (Object.hasOwnProperty.call(object, key)) {
+            const element = data[key];
+            
+        }
+    }
     return (
         <>
-        {data.map(item => (
+        {}
+        {/* {data.map(item => (
           <div className='detailItem'> 
             <div className='itemOne'>
                 <div className='itemTitle'>{item.section}</div>
                 <div className='mb1'>
                     { data.Condo?.Assessments && (<div><span className='w50'>Assessments</span>: <span className='font500'>${data.Condo.Assessments}</span></div>) }
-                    { data.Condo?.AssessmentsYN && (<div><span className='w50'>AssessmentsYN</span>: <span className='font500'>${data.Condo.AssessmentsYN}</span></div>) }
-                    { data.Condo?.AssociationYN && (<div><span className='w50'>AssociationYN</span>: <span className='font500'>${data.Condo.AssociationYN}</span></div>) }
-                    { data.Condo?.HOAFee && (<div><span className='w50'>HOAFee</span>: <span className='font500'>${data.Condo.HOAFee}</span></div>)}
                 </div>
             </div>
             <hr />
           </div> 
-          ))
-        }
-        {/* { data && (
-            <div className='detailItem'> 
-                <div className='itemOne'>
-                    <div className='itemTitle'>Condo</div>
-                    <div className='mb1'>
-                        { data.Condo?.Assessments && (<div><span className='w50'>Assessments</span>: <span className='font500'>${data.Condo.Assessments}</span></div>) }
-                        { data.Condo?.AssessmentsYN && (<div><span className='w50'>AssessmentsYN</span>: <span className='font500'>${data.Condo.AssessmentsYN}</span></div>) }
-                        { data.Condo?.AssociationYN && (<div><span className='w50'>AssociationYN</span>: <span className='font500'>${data.Condo.AssociationYN}</span></div>) }
-                        { data.Condo?.HOAFee && (<div><span className='w50'>HOAFee</span>: <span className='font500'>${data.Condo.HOAFee}</span></div>)}
-                    </div>
-                </div>
-                <hr />
-            </div> 
-        )} */}
+          ))} */}
         </>
     );
 }

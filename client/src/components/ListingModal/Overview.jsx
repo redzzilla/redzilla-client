@@ -63,8 +63,8 @@ const OverviewDetail = (props) => {
     const preferedTime = [];
     for(let i=9;i<=18;i++){
         let d = i, st = 'Am', v = '', dst = '';
-        if(i>12) d = i - 12;
-        if(i>11) st = 'Pm';
+        if (i > 12) d = i - 12;
+        if (i > 11) st = 'Pm';
         dst = d.toString() + ':00 '+st;
         v = i.toString() + ':00';
         preferedTime.push(<option value={v} key={dst}>{dst}</option>)

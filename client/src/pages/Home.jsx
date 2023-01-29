@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useLocation } from "react-router-dom";
 import { Fragment } from 'react/cjs/react.production.min';
-import { GoogleMap } from '../components/GoogleMap';
+import GoogleMap from '../components/GoogleMap';
 import Login from '../components/Login';
 import { useSearchService } from '../services/SearchService';
 import { useSession } from '../contexts/SessionContext'
@@ -9,6 +9,7 @@ import SearchForm from '../components/SearchForm';
 import SaveSearch from '../components/SaveSearch';
 import Constant from '../Constant';
 import { useWindowSize } from '../hooks/useWindowSize'
+import reverse from 'reverse-geocode'
 
 const checkFile = () => {
   try {
@@ -25,6 +26,8 @@ function Home() {
   const [{user}] = useSession();
   const { width } = useWindowSize();
 
+  const [currentLocation, setCurrentLocation] = useState([32.7270, 117.1647])
+  const [userZip, setUserZip] = useState(0);
   const [filterStatus, setFilterStatus] = useState({
     keywords : '92101',
     availableOnly : 1,
@@ -34,6 +37,26 @@ function Home() {
     viewTypes : [],
     per_page : 200
   })
+
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+          const pos = {
+              lat: position.coords.latitude,
+              lng: position.coords.longitude
+          }
+          setCurrentLocation(pos)
+      },
+      () => {
+          alert("Geo Location not supported");
+      }
+    );
+  }
+
+  useEffect(() => {
+    let zipcode = reverse.lookup(currentLocation.lat, currentLocation.lng, 'us').zipcode;
+    setUserZip(zipcode)
+  }, [currentLocation]);
 
   useEffect(() => {
     if(typeof state?.searchIndex !== 'undefined'){
@@ -48,7 +71,11 @@ function Home() {
       <div className="fillterAndSignIn">
         <div className='filterContainer'>
           <div className='searchInputLogin'>
-            <SearchForm filterStatus={filterStatus} setFilterStatus={setFilterStatus}/>
+            <SearchForm 
+              filterStatus={filterStatus} 
+              setFilterStatus={setFilterStatus}
+              userZip={userZip}
+            />
             { width < 770 && <Login/> }
           </div>
 
@@ -72,7 +99,11 @@ function Home() {
       {filterStatus.keywords && data &&
         <Fragment>
           <div style={{ height: '100vh', width: '100%' }}>
-            <GoogleMap initialData={data} filterStatus={filterStatus}/>
+            <GoogleMap 
+              initialData={data} 
+              filterStatus={filterStatus}
+              currentLocation={currentLocation}
+            />
           </div>
         </Fragment>
       }

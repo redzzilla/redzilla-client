@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, memo } from 'react';
 import Select from 'react-select'
 import {FaMapMarkerAlt} from 'react-icons/fa'
 
@@ -7,18 +7,18 @@ import './SearchForm.scss';
 const SearchForm = (props) => {
     const { 
         filterStatus, 
-        setFilterStatus
+        setFilterStatus,
+        userZip
     } = props
     
     const [options, setOptions] = useState([])
     const [value, setValue] = useState('');
 
-    const currLocation = [{
-        'value': '92101',
+    const currLocOpt = [{
+        'value': userZip,
         'label': <div><FaMapMarkerAlt/><span>   Current Location</span></div>
     }]
 
-    console.log(value);
     const handleChange = (e) => {
         setValue(e.label)
         setFilterStatus({
@@ -55,11 +55,11 @@ const SearchForm = (props) => {
           ...provided,
           height: '34px',
         }),
-      };
+    };
 
     useEffect(() => {
         async function searchPosition() {
-            const result = await fetch('./ZIP_CODES.geojson');
+            const result = await fetch('./Zip_Codes.geojson');
             const geojson = await result.json();
             const temp = []
 
@@ -81,9 +81,8 @@ const SearchForm = (props) => {
     return (
         <>
             <Select
-                inputValue={value}
                 onInputChange={setValue}
-                options={value ? options : currLocation}
+                options={value ? options : currLocOpt}
                 onChange={handleChange}
                 styles={customStyles}
                 placeholder = 'City, Neighborhood, ZIP, Address'
@@ -92,4 +91,4 @@ const SearchForm = (props) => {
     )
 }
 
-export default SearchForm;
+export default memo(SearchForm);
