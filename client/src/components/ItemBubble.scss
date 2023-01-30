@@ -2,7 +2,7 @@
     position: absolute;
     left: -100px;
     z-index: 10;
-    top:25px;
+    top: 25px;
     background-color: #ffffff;
 
     &:after {
@@ -52,15 +52,17 @@
 }
 
 .roomsLine {
-    span { 
+    span {
         vertical-align: middle;
     }
+
     img {
         height: 1.0em;
         margin-right: .5em;
         vertical-align: middle;
     }
 }
+
 .marker_grey {
     position: absolute;
     min-width: 48px;
@@ -72,12 +74,13 @@
     color: #ffffff;
     text-align: center;
     border-radius: 10px;
+
     &::after {
         position: absolute;
         border-left: 6px solid transparent;
         border-right: 6px solid transparent;
         border-top: 6px solid grey;
-        transform: translate(150%,30%);
+        transform: translate(150%, 30%);
         z-index: 4;
         content: "";
         display: block;
@@ -103,7 +106,7 @@
         border-left: 6px solid transparent;
         border-right: 6px solid transparent;
         border-top: 6px solid green;
-        transform: translate(150%,30%);
+        transform: translate(150%, 30%);
         z-index: 4;
         content: "";
         display: block;
@@ -129,7 +132,7 @@
         border-left: 6px solid transparent;
         border-right: 6px solid transparent;
         border-top: 6px solid purple;
-        transform: translate(150%,30%);
+        transform: translate(150%, 30%);
         z-index: 4;
         content: "";
         display: block;

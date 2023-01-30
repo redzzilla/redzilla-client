@@ -1,14 +1,14 @@
-import { useState, useRef, useEffect } from 'react';
-import Modal from 'react-modal';
-import { ItemBubbleContent } from './ItemBubbleContent'
-import { ModalStyle } from './Common/Modal.Style';
-import './ItemBubble.scss';
+import { useState, useRef, useEffect } from "react";
+import Modal from "react-modal";
+import { ItemBubbleContent } from "./ItemBubbleContent";
+import { ModalStyle } from "./Common/Modal.Style";
+import "./ItemBubble.scss";
 
-Modal.setAppElement('body');
+Modal.setAppElement("body");
 
 const checkFile = () => {
   try {
-    return require("./ListingModal")
+    return require("./ListingModal");
   } catch (err) {
     return null;
   }
@@ -16,50 +16,50 @@ const checkFile = () => {
 const ListingModal = checkFile() ? checkFile().default : null;
 
 const ItemBubble = ({ item, duplicatedItems }) => {
-  const [isInfoOpen, setIsInfoOpen] = useState(false)
+  const [isInfoOpen, setIsInfoOpen] = useState(false);
   const [isInfoClick, setIsInfoClick] = useState(false);
-  const modalRef = useRef(null)
-  const [modalIsOpen, setModalIsOpen] = useState(false)
-  const [selectedItem, setSelectedItem] = useState([])
+  const modalRef = useRef(null);
+  const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [selectedItem, setSelectedItem] = useState([]);
 
-  const numFormatter = num => {
+  const numFormatter = (num) => {
     if (num > 999 && num < 1000000) {
-      return (num / 1000).toFixed(0) + "K" // convert to K for number from > 1000 < 1 million
+      return (num / 1000).toFixed(0) + "K"; // convert to K for number from > 1000 < 1 million
     } else if (num > 1000000) {
-      return (num / 1000000).toFixed(2) + "M" // convert to M for number from > 1 million
+      return (num / 1000000).toFixed(2) + "M"; // convert to M for number from > 1 million
     } else if (num < 900) {
-      return num // if value < 1000, nothing to do
+      return num; // if value < 1000, nothing to do
     }
-  }
+  };
 
   const openInfo = () => {
     if (!isInfoClick) {
-      setIsInfoOpen(true)
+      setIsInfoOpen(true);
     }
-  }
+  };
   const pointInfo = () => {
-    setIsInfoClick(true)
-    setIsInfoOpen(true)
-  }
+    setIsInfoClick(true);
+    setIsInfoOpen(true);
+  };
   const openModal = (clickedItem) => {
-    setSelectedItem(clickedItem)
-    setModalIsOpen(true)
-  }
+    setSelectedItem(clickedItem);
+    setModalIsOpen(true);
+  };
 
   const closeModal = () => {
-    setModalIsOpen(false)
-  }
+    setModalIsOpen(false);
+  };
 
   useEffect(() => {
-      window.addEventListener('mouseover', handleOut);
-      return () => window.removeEventListener('mouseover', handleOut);
-  }, [])
+    window.addEventListener("mouseover", handleOut);
+    return () => window.removeEventListener("mouseover", handleOut);
+  }, []);
 
   const handleOut = (e) => {
-    if(modalRef?.current?.contains(e.target)) return
+    if (modalRef?.current?.contains(e.target)) return;
     setIsInfoClick(false);
     setIsInfoOpen(false);
-}
+  };
 
   return (
     <>
@@ -67,7 +67,15 @@ const ItemBubble = ({ item, duplicatedItems }) => {
         ref={modalRef}
         onClick={pointInfo}
         onMouseOver={openInfo}
-        className= {item.isSecondaryResult ? (!isInfoOpen ? "marker_grey" : "marker_purple") : (!isInfoOpen ? "marker_green" : "marker_purple")}
+        className={
+          item.isSecondaryResult
+            ? !isInfoOpen
+              ? "marker_grey"
+              : "marker_purple"
+            : !isInfoOpen
+            ? "marker_green"
+            : "marker_purple"
+        }
       >
         {duplicatedItems.length > 1
           ? duplicatedItems.length + " Listings"
@@ -77,29 +85,30 @@ const ItemBubble = ({ item, duplicatedItems }) => {
           className="popOutDiv"
           style={{ display: isInfoClick || isInfoOpen ? "block" : "none" }}
         >
-          <ItemBubbleContent openModal={openModal} duplicatedItems={duplicatedItems} isInfoOpen={isInfoOpen}/>
+          <ItemBubbleContent
+            openModal={openModal}
+            duplicatedItems={duplicatedItems}
+            isInfoOpen={isInfoOpen}
+          />
         </div>
       </div>
 
-      { ListingModal &&
+      {ListingModal && (
         <Modal
           isOpen={modalIsOpen}
           style={{
             overlay: ModalStyle.overlay,
             content: {
               ...ModalStyle.content,
-              width: '1300px'
-            }
+              width: "1300px",
+            },
           }}
         >
-          <ListingModal
-            itemId={selectedItem.id}
-            closeModal={closeModal}
-          />
+          <ListingModal itemId={selectedItem.id} closeModal={closeModal} />
         </Modal>
-      }
+      )}
     </>
-  )
-}
+  );
+};
 
-export { ItemBubble }
+export { ItemBubble };

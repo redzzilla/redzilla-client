@@ -1,70 +1,81 @@
-.datailContainer{
+.datailContainer {
     width: 480px;
     max-width: 100%;
     height: 100vh;
     display: flex;
     flex-direction: column;
 
-    @media (max-width: 750px){
+    @media (max-width: 750px) {
         height: auto;
         width: 100%;
     }
 
-    .itemHeader{
-        padding:15px 10px;
+    .itemHeader {
+        padding: 15px 10px;
         display: flex;
         align-items: center;
         justify-content: space-between;
-        @media (max-width: 400px){
+
+        @media (max-width: 400px) {
             flex-direction: column;
             align-items: flex-start;
         }
-        .modalLogo{
+
+        .modalLogo {
             height: 30px;
-            @media (max-width: 400px){
+
+            @media (max-width: 400px) {
                 margin-bottom: 10px;
             }
         }
-        .itemAction{
+
+        .itemAction {
             display: flex;
             cursor: pointer;
             color: rgb(0, 106, 255);
-            .actionBtn{
+
+            .actionBtn {
                 display: flex;
                 align-items: center;
                 margin-right: 14px;
                 font-size: 15px;
-                &:hover{
+
+                &:hover {
                     text-decoration: underline;
                 }
             }
         }
     }
 
-    .itemMain{
+    .itemMain {
         display: flex;
         flex: 1;
         flex-direction: column;
         height: calc(100vh - 80px);
         max-height: calc(100vh - 80px);
-        padding:10px;
-        .itemOne{
-            margin:15px 0px 20px 0px;
+        padding: 10px;
+
+        .itemOne {
+            margin: 15px 0px 20px 0px;
             padding: 0px 10px 0px 10px;
         }
-        .itemPrice{
-            span{
+
+        .itemPrice {
+            span {
                 display: inline-block;
             }
-            .mainPrice{
+
+            .mainPrice {
                 font-size: 36px;
                 font-weight: 700;
                 margin-right: 20px;
             }
-            .roomCounts{
+
+            .roomCounts {
                 white-space: nowrap;
             }
-            .getPayBtn{
+
+            .getPayBtn {
                 margin-left: 10px;
                 display: flex;
                 align-items: center;
@@ -74,31 +85,42 @@
                 color: rgb(0, 106, 255);
                 font-weight: 500;
             }
-            @media (max-width: 400px){
-                .alignCenter{
+
+            @media (max-width: 400px) {
+                .alignCenter {
                     flex-direction: column;
                     align-items: start;
                 }
             }
         }
-        .itemButtons{
-            .btn{
-                width:48%;
+
+        .itemButtons {
+            .btn {
+                width: 48%;
                 box-sizing: border-box;
             }
         }
-        .detailMain{
+
+        .detailMain {
             flex: 1;
             overflow-y: auto;
             max-height: 100%;
-            .inputBox{
+
+            .inputBox {
                 background-color: rgb(246, 246, 250);
             }
-            .detailItem{
+
+            .detailItem {
                 position: relative;
                 margin-right: 10px;
             }
-            .itemTitle{
+
+            .detailPreItem {
+                position: relative;
+                margin-right: 10px;
+            }
+
+            .itemTitle {
                 font-size: 24px;
                 font-weight: 700;
                 margin: 20px 0px 10px 0px;

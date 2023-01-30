@@ -1,35 +1,31 @@
-import React, {useRef} from 'react'
+import React from 'react'
 
 const Contact = (props) => {
     const { data } = props
-    const nameRef = useRef();
-    const phoneRef = useRef();
-    const emailRef = useRef();
-    const msgRef = useRef();
 
     return (
         <>
-          <div className='detailItem'> 
+          <div className='detailPreItem'> 
             <div className='itemOne'>
               <div className='itemTitle'>Contact Agent</div>
                 <div className='mb1'>
                   <span className='font500'>Name</span>
-                  <input type='text' className='inputBox' ref={nameRef} />
+                  <input type='text' className='inputBox' />
                 </div>
               <div className='mb1'>
                   <span className='font500'>Phone</span>
-                  <input type='text' className='inputBox' ref={phoneRef} />
+                  <input type='text' className='inputBox' />
               </div>
               <div className='mb1'>
                   <span className='font500'>Email</span>
-                  <input type='text' className='inputBox' ref={emailRef} />
+                  <input type='text' className='inputBox' />
               </div>
               <div className='mb1'>
                   <span className='font500'>Message</span>
                   <textarea 
                       rows='2' 
                       className='inputBox' 
-                      defaultValue={`I am interested in ${data.Location['Geo Address Line'] + ', ' + data.Location.City + ', ' + data.Location.State + ' ' + data.Location.Zip}`} ref={msgRef} 
+                      defaultValue={`I am interested in ${data.Location['Geo Address Line'] + ', ' + data.Location.City + ', ' + data.Location.State + ' ' + data.Location.Zip}`} 
                   />
               </div>
               <div className='btn btnPrimary mb1 w100 font16 fontBold'>Contact Agent</div>

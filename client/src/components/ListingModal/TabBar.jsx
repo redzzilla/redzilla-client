@@ -56,7 +56,7 @@ const TabBar = (props) => {
     setValue(newValue);
   };
 
-  const labelList = Object.keys(data).filter(catNam =>
+  const labelList = Object.keys(data).filter((catNam) =>
     meta.some((element) => element.category === catNam)
   );
 

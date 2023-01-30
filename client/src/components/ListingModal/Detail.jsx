@@ -5,7 +5,6 @@ import { RiShareForwardLine } from 'react-icons/ri';
 import { BsThreeDots } from 'react-icons/bs';
 import { AiFillDollarCircle } from 'react-icons/ai';
 import TabBar from './TabBar';
-import Overview from './Overview';
 import './Detail.scss';
 import DataDrivenDisplay from './DataDrivenDisplay';
 

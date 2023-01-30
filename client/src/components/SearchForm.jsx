@@ -63,8 +63,7 @@ const SearchForm = (props) => {
             const geojson = await result.json();
             const temp = []
 
-            // eslint-disable-next-line array-callback-return
-            geojson.features.map(item => {
+            geojson.features.forEach(item => {
                 const twin = temp.find(one => one.label === item.label);
                 if(!twin) {
                     temp.push({
