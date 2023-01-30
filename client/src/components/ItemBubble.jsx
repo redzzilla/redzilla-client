@@ -39,7 +39,9 @@ const ItemBubble = ({ item, duplicatedItems }) => {
   };
   const pointInfo = () => {
     setIsInfoClick(true);
-    setIsInfoOpen(true);
+    if (duplicatedItems.length === 1) {
+      openModal(item)
+    }
   };
   const openModal = (clickedItem) => {
     setSelectedItem(clickedItem);
