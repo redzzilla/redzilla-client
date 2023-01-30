@@ -1,6 +1,6 @@
 import React, {useRef} from 'react'
 
-const Condo = (props) => {
+const Contact = (props) => {
     const { data } = props
     const nameRef = useRef();
     const phoneRef = useRef();
@@ -46,4 +46,4 @@ const Condo = (props) => {
         </>
     );
 }
-export default Condo;
+export default Contact;
