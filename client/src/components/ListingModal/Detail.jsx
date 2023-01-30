@@ -6,23 +6,8 @@ import { BsThreeDots } from 'react-icons/bs';
 import { AiFillDollarCircle } from 'react-icons/ai';
 import TabBar from './TabBar';
 import Overview from './Overview';
-import Fact from './Fact';
-import Condo from './Condo';
-import Exterior from './Exterior';
-import Financials from './Financials';
-import Layout from './Layout';
-import ListingSource from './ListingSource';
-import LocalGovernment from './LocalGovernment';
-import Location from './Location';
-import Parking from './Parking';
-import PhysicalCondition from './PhysicalCondition';
-import RoomDetails from './RoomDetails';
-import System from './System';
-import TransactionType from './TransactionType';
-import UnMapped from './UnMapped';
-import LastModified from './LastModified';
-
 import './Detail.scss';
+import DataDrivenDisplay from './DataDrivenDisplay';
 
 const numFormatter = num => {
     const hindiNumberFormatter = new Intl.NumberFormat("en-US");
@@ -34,10 +19,10 @@ const Detail = (props) => {
         data
     } = props
 
-    const [scrollTop, SetScrollTop] = useState(0);
+    const [scrollTop, setScrollTop] = useState(0);
 
     const handleScroll = (e) => {
-        SetScrollTop(e.target.scrollTop);
+        setScrollTop(e.target.scrollTop);
     }
     
     return (
@@ -91,25 +76,11 @@ const Detail = (props) => {
                             </div>
                         </div>
 
-                        <TabBar scrollTop={scrollTop}/>
+                        <TabBar scrollTop={scrollTop} data={data} />
                         
                         <div className='detailMain' onScroll={handleScroll}>
                             <Overview data={data}/>
-                            <Fact data={data} />
-                            <Condo data={data} />
-                            <Exterior data={data} />
-                            <Financials data={data} />
-                            <Layout data={data} />
-                            <ListingSource data={data} />
-                            <LocalGovernment data={data} />
-                            <Location data={data} />
-                            <Parking data={data} />
-                            <PhysicalCondition data={data} />
-                            <RoomDetails data={data} />
-                            <System data={data} />
-                            <TransactionType data={data} />
-                            <UnMapped data={data} />
-                            <LastModified data={data} />
+                            <DataDrivenDisplay data={data} />
                         </div>
 
                     </div>

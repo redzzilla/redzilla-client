@@ -1,29 +1,29 @@
 import React from 'react'
-import metadata from './metadata.json'
+import Contact from './Contact'
+const meta = require('./metadata.json')
 
 const DataDrivenDisplay = (props) => {
     const { data } = props
-    const arr = [];
-    for (const key in data) {
-        if (Object.hasOwnProperty.call(object, key)) {
-            const element = data[key];
-            
-        }
-    }
+    const validCateNam= Object.keys(data).filter(cateNam => meta.some(item => item.category === cateNam))
+
     return (
         <>
-        {}
-        {/* {data.map(item => (
-          <div className='detailItem'> 
-            <div className='itemOne'>
-                <div className='itemTitle'>{item.section}</div>
-                <div className='mb1'>
-                    { data.Condo?.Assessments && (<div><span className='w50'>Assessments</span>: <span className='font500'>${data.Condo.Assessments}</span></div>) }
-                </div>
-            </div>
-            <hr />
-          </div> 
-          ))} */}
+            <Contact data={data} />
+            {validCateNam.map(categoryName => (
+                <div className='detailItem' key={categoryName}> 
+                    <div className='itemOne'>
+                        <div className='itemTitle'>{categoryName}</div>
+                        <div className='mb1'>
+                            {Object.keys(data[categoryName]).map(fieldName => {
+                                const obj = meta.find(item => item.unifiedName === fieldName && item.category === categoryName);
+                                let name = obj?.longName || fieldName;
+                                return (<div key={fieldName}><span className='w50' style={{overflowWrap: "break-word"}}>{name}</span>: <span className='font500' style={{overflowWrap: "break-word"}}>{data[categoryName][fieldName]}</span></div>)
+                            })}
+                        </div>
+                    </div>
+                    <hr />
+                </div> 
+            ))}
         </>
     );
 }

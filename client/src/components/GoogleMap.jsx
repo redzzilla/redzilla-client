@@ -65,7 +65,7 @@ const GoogleMap = ({initialData, filterStatus, currentLocation}) => {
             title: 'User Location'
         })
         marker.setMap(map)
-        const result = await fetch('./ZIP_CODES.geojson')
+        const result = await fetch('/ZIP_CODES.geojson')
         const geojson = await result.json();
         const filterData = geojson.features.find(item => parseInt(item.properties.ZIP) === parseInt(filterStatus.keywords));
         const triangleCoords = [];

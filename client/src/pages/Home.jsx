@@ -26,7 +26,7 @@ function Home() {
   const [{user}] = useSession();
   const { width } = useWindowSize();
 
-  const [currentLocation, setCurrentLocation] = useState([32.7270, 117.1647])
+  const [currentLocation, setCurrentLocation] = useState({lat:32.7270, lng:117.1647})
   const [userZip, setUserZip] = useState(0);
   const [filterStatus, setFilterStatus] = useState({
     keywords : '92101',

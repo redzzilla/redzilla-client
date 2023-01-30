@@ -61,7 +61,7 @@ const OverviewDetail = (props) => {
     }, [])
 
     const preferedTime = [];
-    for(let i=9;i<=18;i++){
+    for(let i = 9; i <= 18; i++){
         let d = i, st = 'Am', v = '', dst = '';
         if (i > 12) d = i - 12;
         if (i > 11) st = 'Pm';
@@ -118,18 +118,6 @@ const OverviewDetail = (props) => {
                             </div>
                         </div> )
                 }
-            </div>
-            <hr/>
-            <div className='itemOne'>
-                <div className='itemTitle'>Overview</div>
-                { data.Overview?.Rem && <div className='mb1'>{data.Overview.Rem}</div> }
-                <div className='mb1'>
-                    {data.Overview?.AgeRestr && <div><span className='w50'>AgeRestr</span>: <span className='font500'>{data.Overview.AgeRestr}</span></div>}
-                    {data.Overview?.LVTDate && <div><span className='w50'>LVTDate</span>: <span className='font500'>{data.Overview.LVTDate}</span> </div>}
-                    {data.Overview?.MandRem && <div><span className='w50'>MandRem</span>: <span className='font500'>{data.Overview.MandRem}</span> </div>}
-                    {data.Overview?.PriPerSQFT && <div><span className='w50'>PriPerSQFT</span>: <span className='font500'>${data.Overview.PriPerSQFT}</span> </div>}
-                    {data.Overview['Residential Sub-Category'] && <div><span className='w50'>Residential Sub-Category</span>: <span className='font500'>{data.Overview['Residential Sub-Category']}</span></div>}
-                </div>
             </div>
             <hr/>
             <div className='itemOne'>

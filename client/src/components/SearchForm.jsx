@@ -59,7 +59,7 @@ const SearchForm = (props) => {
 
     useEffect(() => {
         async function searchPosition() {
-            const result = await fetch('./Zip_Codes.geojson');
+            const result = await fetch('/Zip_Codes.geojson');
             const geojson = await result.json();
             const temp = []
 

@@ -3,6 +3,7 @@ import { styled } from '@mui/material/styles';
 import Tabs, { tabsClasses } from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Box from '@mui/material/Box';
+const meta = require('./metadata.json')
 
 const StyledTab = styled((props) => <Tab disableRipple {...props} />)(
     ({ theme }) => ({
@@ -27,6 +28,7 @@ const StyledTab = styled((props) => <Tab disableRipple {...props} />)(
 const TabBar = (props) => {
     const {
         scrollTop,
+        data
     } = props
 
     useEffect(() => {
@@ -57,6 +59,8 @@ const TabBar = (props) => {
 
         setValue(newValue);
     };
+
+    const labelList = Object.keys(data).filter(catNam => meta.some(element => element.category === catNam))
   
     return (
       <Box sx={{
@@ -72,22 +76,7 @@ const TabBar = (props) => {
           scrollButtons="auto"
           allowScrollButtonsMobile
         >
-          <StyledTab label="Overview" />
-          <StyledTab label="Facts and features" />
-          <StyledTab label="Condo" />
-          <StyledTab label="Exterior" />
-          <StyledTab label="Financials" />
-          <StyledTab label="Layout" />
-          <StyledTab label="ListingSource" />
-          <StyledTab label="LocalGovernment" />
-          <StyledTab label="Location" />
-          <StyledTab label="Parking" />
-          <StyledTab label="PhysicalCondition" />
-          <StyledTab label="RoomDetails" />
-          <StyledTab label="System" />
-          <StyledTab label="TransactionType" />
-          <StyledTab label="UnMapped" />
-          <StyledTab label="LastModified" />
+          {labelList.map(labelName => (<StyledTab label={labelName} key={labelName} />))}
         </Tabs>
         <hr />
       </Box>
