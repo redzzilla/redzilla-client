@@ -26,7 +26,7 @@ const GoogleMap = ({ initialData, filterStatus, currentLocation }) => {
       let position = new maps.LatLng(data[i].latitude, data[i].longitude);
       bounds.extend(position);
     }
-    maps.event.addListener(map, "bounds_changed", () => {
+    maps.event.addListener(map, "mouseup", () => {
       let bounds = map.getBounds();
       let ne = bounds.getNorthEast();
       let sw = bounds.getSouthWest();
@@ -57,6 +57,7 @@ const GoogleMap = ({ initialData, filterStatus, currentLocation }) => {
   };
 
   const handleApiLoaded = async (map, maps) => {
+    console.log('map rendered');
     mergeDataFunction(map, maps);
     let marker = new maps.Marker({
       position: currentLocation,
@@ -103,7 +104,9 @@ const GoogleMap = ({ initialData, filterStatus, currentLocation }) => {
         }}
         defaultZoom={12}
         defaultCenter={currentLocation}
-        onGoogleApiLoaded={({ map, maps }) => handleApiLoaded(map, maps)}
+        onGoogleApiLoaded={({ map, maps }) => {
+          handleApiLoaded(map, maps)
+        }}
       >
         {data.map((item, i) => {
           const duplicatedItems = data.filter(

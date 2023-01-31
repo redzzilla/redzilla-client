@@ -2,20 +2,8 @@
     position: absolute;
     left: -100px;
     z-index: 10;
-    top: 25px;
+    top: 20px;
     background-color: #ffffff;
-
-    &:after {
-        position: absolute;
-        background: white;
-        box-shadow: 2px 0px 0px 0px rgb(178 178 178 / 40%);
-        content: "";
-        height: 15px;
-        left: 130px;
-        top: 0px;
-        transform: translate(-50%, -50%) rotate(-45deg);
-        width: 15px;
-    }
 }
 
 .popContainer {
