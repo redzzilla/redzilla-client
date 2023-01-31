@@ -57,7 +57,6 @@ const GoogleMap = ({ initialData, filterStatus, currentLocation }) => {
   };
 
   const handleApiLoaded = async (map, maps) => {
-    console.log('map rendered');
     mergeDataFunction(map, maps);
     let marker = new maps.Marker({
       position: currentLocation,
