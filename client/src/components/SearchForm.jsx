@@ -1,4 +1,4 @@
-import { useEffect, useState, memo } from 'react';
+import { useEffect, useState } from 'react';
 import Select from 'react-select'
 import {FaMapMarkerAlt} from 'react-icons/fa'
 
@@ -90,4 +90,4 @@ const SearchForm = (props) => {
     )
 }
 
-export default memo(SearchForm);
+export default SearchForm;

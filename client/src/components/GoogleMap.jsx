@@ -1,4 +1,4 @@
-import { useState, memo } from "react";
+import { useState } from "react";
 import GoogleMapReact from "google-map-react";
 import { ItemBubble } from "./ItemBubble";
 
@@ -126,4 +126,4 @@ const GoogleMap = ({ initialData, filterStatus, currentLocation }) => {
   );
 };
 
-export default memo(GoogleMap);
+export default GoogleMap;
