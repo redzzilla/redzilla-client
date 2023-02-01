@@ -119,7 +119,7 @@ const OverviewDetail = (props) => {
           <GoogleMapReact
             yesIWantToUseGoogleMapApiInternals
             bootstrapURLKeys={{
-              key: "AIzaSyDy4vJLsIMYYK8_CyTGciCUtsA2_87DXWg",
+              key: process.env.REACT_APP_GOOGLE_KEY,
               libraries: "places",
             }}
             defaultCenter={[
@@ -144,7 +144,7 @@ const OverviewDetail = (props) => {
                 <FaCarSide />
               </span>
               <Autocomplete
-                apiKey="AIzaSyDy4vJLsIMYYK8_CyTGciCUtsA2_87DXWg"
+                apiKey={process.env.REACT_APP_GOOGLE_KEY}
                 onPlaceSelected={(place) => {
                   console.log(place);
                 }}

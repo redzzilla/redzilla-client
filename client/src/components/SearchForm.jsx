@@ -3,6 +3,7 @@ import Select from 'react-select'
 import {FaMapMarkerAlt} from 'react-icons/fa'
 
 import './SearchForm.scss';
+import geoService from '../services/GeoService';
 
 const SearchForm = (props) => {
     const { 
@@ -59,8 +60,7 @@ const SearchForm = (props) => {
 
     useEffect(() => {
         async function searchPosition() {
-            const result = await fetch('/Zip_Codes.geojson');
-            const geojson = await result.json();
+            const geojson = await geoService();
             const temp = []
 
             geojson.features.forEach(item => {

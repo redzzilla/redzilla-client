@@ -1,6 +1,7 @@
 import { useState } from "react";
 import GoogleMapReact from "google-map-react";
 import { ItemBubble } from "./ItemBubble";
+import geoService from "../services/GeoService";
 
 const GoogleMap = ({ initialData, filterStatus, currentLocation }) => {
   const [data, setData] = useState(initialData);
@@ -26,6 +27,7 @@ const GoogleMap = ({ initialData, filterStatus, currentLocation }) => {
       let position = new maps.LatLng(data[i].latitude, data[i].longitude);
       bounds.extend(position);
     }
+    console.log('MergeDataFunction');
     maps.event.addListener(map, "mouseup", () => {
       let bounds = map.getBounds();
       let ne = bounds.getNorthEast();
@@ -57,6 +59,7 @@ const GoogleMap = ({ initialData, filterStatus, currentLocation }) => {
   };
 
   const handleApiLoaded = async (map, maps) => {
+    console.log('Api loaded');
     mergeDataFunction(map, maps);
     let marker = new maps.Marker({
       position: currentLocation,
@@ -64,8 +67,7 @@ const GoogleMap = ({ initialData, filterStatus, currentLocation }) => {
       title: "User Location",
     });
     marker.setMap(map);
-    const result = await fetch("/ZIP_CODES.geojson");
-    const geojson = await result.json();
+    const geojson = await geoService()
     const filterData = geojson.features.find(
       (item) =>
         parseInt(item.properties.ZIP) === parseInt(filterStatus.keywords)
@@ -98,7 +100,7 @@ const GoogleMap = ({ initialData, filterStatus, currentLocation }) => {
       <GoogleMapReact
         yesIWantToUseGoogleMapApiInternals
         bootstrapURLKeys={{
-          key: "AIzaSyDy4vJLsIMYYK8_CyTGciCUtsA2_87DXWg",
+          key: process.env.REACT_APP_GOOGLE_KEY,
           libraries: "places",
         }}
         defaultZoom={12}
