@@ -41,20 +41,23 @@ function Home() {
     per_page: 200,
   });
 
-  if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(
-      (position) => {
-        const pos = {
-          lat: position.coords.latitude,
-          lng: position.coords.longitude,
-        };
-        setCurrentLocation(pos);
-      },
-      () => {
-        alert("Geo Location not supported");
-      }
-    );
-  }
+  
+  useEffect(() => {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          const pos = {
+            lat: position.coords.latitude,
+            lng: position.coords.longitude,
+          };
+          setCurrentLocation(pos);
+        },
+        () => {
+          alert("Geo Location not supported");
+        }
+      );
+    }
+  }, []);
 
   useEffect(() => {
     let zipcode = reverse.lookup(
