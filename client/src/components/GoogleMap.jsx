@@ -27,8 +27,7 @@ const GoogleMap = ({ initialData, filterStatus, currentLocation }) => {
       let position = new maps.LatLng(data[i].latitude, data[i].longitude);
       bounds.extend(position);
     }
-    console.log('MergeDataFunction');
-    maps.event.addListener(map, "mouseup", () => {
+    maps.event.addListener(map, "bounds_changed", () => {
       let bounds = map.getBounds();
       let ne = bounds.getNorthEast();
       let sw = bounds.getSouthWest();
@@ -59,7 +58,6 @@ const GoogleMap = ({ initialData, filterStatus, currentLocation }) => {
   };
 
   const handleApiLoaded = async (map, maps) => {
-    console.log('Api loaded');
     mergeDataFunction(map, maps);
     let marker = new maps.Marker({
       position: currentLocation,
