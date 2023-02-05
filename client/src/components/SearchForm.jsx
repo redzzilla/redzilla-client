@@ -6,12 +6,12 @@ import './SearchForm.scss';
 import geoService from '../services/GeoService';
 
 const SearchForm = (props) => {
-    const { 
-        filterStatus, 
+    const {
+        filterStatus,
         setFilterStatus,
         userZip
     } = props
-    
+
     const [options, setOptions] = useState([])
     const [value, setValue] = useState('');
 
@@ -36,7 +36,6 @@ const SearchForm = (props) => {
           textOverflow: "ellipsis",
           minWidth: "300px"
         }),
-    
         valueContainer: (provided, state) => ({
           ...provided,
           height: '32px',
@@ -44,7 +43,6 @@ const SearchForm = (props) => {
           textOverflow: "ellipsis",
           fontSize: "14px"
         }),
-    
         input: (provided, state) => ({
           ...provided,
           margin: '0px',

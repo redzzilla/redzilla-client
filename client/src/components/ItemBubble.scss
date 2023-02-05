@@ -53,8 +53,8 @@
 
 .marker_grey {
     position: absolute;
-    min-width: 48px;
-    width: max-content;
+    transform: translate(-50%, calc(-100% - 6px));
+    width: 56px;
     height: auto;
     background-color: grey;
     padding: 2px;
@@ -68,7 +68,7 @@
         border-left: 6px solid transparent;
         border-right: 6px solid transparent;
         border-top: 6px solid grey;
-        transform: translate(150%, 30%);
+        transform: translate(23px, 30%);
         z-index: 4;
         content: "";
         display: block;
@@ -79,8 +79,8 @@
 
 .marker_green {
     position: absolute;
-    min-width: 48px;
-    width: max-content;
+    transform: translate(-50%, calc(-100% - 6px));
+    width: 56px;
     height: auto;
     background-color: green;
     padding: 2px;
@@ -94,7 +94,7 @@
         border-left: 6px solid transparent;
         border-right: 6px solid transparent;
         border-top: 6px solid green;
-        transform: translate(150%, 30%);
+        transform: translate(23px, 30%);
         z-index: 4;
         content: "";
         display: block;
@@ -105,8 +105,8 @@
 
 .marker_purple {
     position: absolute;
-    min-width: 48px;
-    width: max-content;
+    transform: translate(-50%, calc(-100% - 6px));
+    width: 56px;
     height: auto;
     background-color: purple;
     padding: 2px;
@@ -114,13 +114,14 @@
     color: #ffffff;
     text-align: center;
     border-radius: 10px;
+    z-index: 4;
 
     &::after {
         position: absolute;
         border-left: 6px solid transparent;
         border-right: 6px solid transparent;
         border-top: 6px solid purple;
-        transform: translate(150%, 30%);
+        transform: translate(23px, 30%);
         z-index: 4;
         content: "";
         display: block;
