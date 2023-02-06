@@ -37,18 +37,6 @@
   },
   {
     "source": "SDMLS",
-    "systemName": "L_Area",
-    "dataType": "Small",
-    "maxLength": "5",
-    "standardName": "ListingArea",
-    "longName": "Zip/Area",
-    "dbName": "ZipArea",
-    "shortName": "ZipArea",
-    "unifiedName": "ZipArea",
-    "category": "Location"
-  },
-  {
-    "source": "SDMLS",
     "systemName": "L_SystemPrice",
     "dataType": "Int",
     "maxLength": "10",
@@ -58,6 +46,17 @@
     "shortName": "SrchPrice",
     "unifiedName": "SrchPrice",
     "category": "System"
+  },  {
+    "source": "SDMLS",
+    "systemName": "L_Area",
+    "dataType": "Small",
+    "maxLength": "5",
+    "standardName": "ListingArea",
+    "longName": "Zip/Area",
+    "dbName": "ZipArea",
+    "shortName": "ZipArea",
+    "unifiedName": "ZipArea",
+    "category": "Location"
   },
   {
     "source": "SDMLS",

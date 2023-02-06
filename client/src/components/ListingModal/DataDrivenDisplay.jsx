@@ -6,20 +6,21 @@ const meta = require("./metadata.json");
 const DataDrivenDisplay = (props) => {
   const { data, onScroll } = props;
 
-  const validCateNam = Object.keys(data).filter((cateNam) =>
-    meta.some((item) => item.category === cateNam)
-  );
+  const catList = meta.reduce((list, item) => {
+    if (!list.includes(item.category)) list.push(item.category);
+    return list
+  }, []);
 
   return (
     <div className="detailMain" onScroll={onScroll}>
       <OverviewDetail data={data} />
       <Contact data={data} />
-      {validCateNam.map((categoryName) => (
+      {catList.map((categoryName) => (
         <div className="detailItem" key={categoryName}>
           <div className="itemOne">
             <div className="itemTitle">{categoryName}</div>
             <div className="mb1">
-              {Object.keys(data[categoryName]).map((fieldName) => {
+              {data[categoryName] && Object.keys(data[categoryName]).map((fieldName) => {
                 const obj = meta.find(
                   (item) =>
                     item.unifiedName === fieldName &&

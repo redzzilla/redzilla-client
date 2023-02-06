@@ -56,9 +56,15 @@ const TabBar = (props) => {
     setValue(newValue);
   };
 
-  const labelList = Object.keys(data).filter((catNam) =>
-    meta.some((element) => element.category === catNam)
-  );
+  const catList = meta.reduce((list, item) => {
+    if (!list.includes(item.category)) list.push(item.category);
+    return list
+  }, []);
+
+  const tabList = catList.reduce((tabList, category) => {
+    if (Object.keys(data).includes(category)) tabList.push(category)
+    return tabList;
+  }, [])
 
   return (
     <Box
@@ -76,7 +82,7 @@ const TabBar = (props) => {
         scrollButtons="auto"
         allowScrollButtonsMobile
       >
-        {labelList.map((labelName) => (
+        {tabList.map((labelName) => (
           <StyledTab label={labelName} key={labelName} />
         ))}
       </Tabs>
