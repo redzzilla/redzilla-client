@@ -41,7 +41,6 @@ function Home() {
     per_page: 200,
   });
 
-  
   useEffect(() => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(

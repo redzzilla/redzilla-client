@@ -27,7 +27,7 @@ const GoogleMap = ({ initialData, filterStatus, currentLocation }) => {
       let position = new maps.LatLng(data[i].latitude, data[i].longitude);
       bounds.extend(position);
     }
-    maps.event.addListener(map, "bounds_changed", () => {
+    maps.event.addListener(map, "tilesloaded", () => {
       let bounds = map.getBounds();
       let ne = bounds.getNorthEast();
       let sw = bounds.getSouthWest();
