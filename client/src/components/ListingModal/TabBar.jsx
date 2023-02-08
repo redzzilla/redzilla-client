@@ -26,7 +26,7 @@ const StyledTab = styled((props) => <Tab disableRipple {...props} />)(
 );
 
 const TabBar = (props) => {
-  const { scrollTop, data } = props;
+  const { scrollTop } = props;
   const [value, setValue] = useState(0);
 
   useEffect(() => {
@@ -56,15 +56,12 @@ const TabBar = (props) => {
     setValue(newValue);
   };
 
-  const catList = meta.reduce((list, item) => {
-    if (!list.includes(item.category)) list.push(item.category);
-    return list
-  }, []);
+  const catList = meta.reduce((list, item) => list.includes(item.category) ? list : [...list, item.category], []);
 
-  const tabList = catList.reduce((tabList, category) => {
-    if (Object.keys(data).includes(category)) tabList.push(category)
-    return tabList;
-  }, [])
+  // const tabList = catList.reduce((tabList, category) => {
+  //   if (Object.keys(data).includes(category)) tabList.push(category)
+  //   return tabList;
+  // }, [])
 
   return (
     <Box
@@ -82,7 +79,7 @@ const TabBar = (props) => {
         scrollButtons="auto"
         allowScrollButtonsMobile
       >
-        {tabList.map((labelName) => (
+        {catList.map((labelName) => (
           <StyledTab label={labelName} key={labelName} />
         ))}
       </Tabs>

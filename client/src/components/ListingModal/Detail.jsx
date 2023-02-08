@@ -75,7 +75,7 @@ const Detail = (props) => {
                             </div>
                         </div>
 
-                        <TabBar scrollTop={scrollTop} data={data} />
+                        <TabBar scrollTop={scrollTop} />
                         <DataDrivenDisplay data={data} onScroll={handleScroll} />
                     </div>
                 </>

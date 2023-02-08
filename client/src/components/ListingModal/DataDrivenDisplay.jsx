@@ -6,10 +6,7 @@ const meta = require("./metadata.json");
 const DataDrivenDisplay = (props) => {
   const { data, onScroll } = props;
 
-  const catList = meta.reduce((list, item) => {
-    if (!list.includes(item.category)) list.push(item.category);
-    return list
-  }, []);
+  const catList = meta.reduce((list, item) => list.includes(item.category) ? list : [...list, item.category], []);
 
   return (
     <div className="detailMain" onScroll={onScroll}>
@@ -20,31 +17,28 @@ const DataDrivenDisplay = (props) => {
           <div className="itemOne">
             <div className="itemTitle">{categoryName}</div>
             <div className="mb1">
-              {data[categoryName] && Object.keys(data[categoryName]).map((fieldName) => {
-                const obj = meta.find(
-                  (item) =>
-                    item.unifiedName === fieldName &&
-                    item.category === categoryName
-                );
-                let name = obj?.longName || fieldName;
-                return (
-                  <div key={fieldName}>
+              {data[categoryName] &&
+              meta.filter(item => item.category === categoryName)
+              .reduce((acc, curr) => acc.includes([curr.unifiedName, curr.longName]) ? acc : [...acc, [curr.unifiedName, curr.longName]], [])
+              .map((item, index) => {
+                return data[categoryName][item[0]] && (
+                  <div key={index}>
                     <span
                       className="w50"
                       style={{ overflowWrap: "break-word" }}
                     >
-                      {name}
+                      {item[1]}
                     </span>
                     :{" "}
                     <span
                       className="font500"
                       style={{ overflowWrap: "break-word" }}
                     >
-                      {data[categoryName][fieldName]}
+                      {data[categoryName][item[0]]}
                     </span>
                   </div>
                 );
-              })}
+                })}
             </div>
           </div>
           <hr />
