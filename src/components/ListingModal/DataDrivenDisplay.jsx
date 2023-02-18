@@ -6,39 +6,41 @@ const meta = require("./metadata.json");
 const DataDrivenDisplay = (props) => {
   const { data, onScroll } = props;
 
-  const catList = meta.reduce((list, item) => list.includes(item.category) ? list : [...list, item.category], []);
+  const categoryObj = meta.reduce((obj, item) => {
+    if (!obj[item.category]) {
+      obj[item.category] = { title: item.category, items: [] };
+    }
+    obj[item.category].items.push({
+      unifiedName: item.unifiedName,
+      longName: item.longName
+    });
+    return obj;
+  }, {});
 
   return (
     <div className="detailMain" onScroll={onScroll}>
       <OverviewDetail data={data} />
       <Contact data={data} />
-      {catList.map((categoryName) => (
+      {Object.keys(categoryObj).map((categoryName) => (
         <div className="detailItem" key={categoryName}>
           <div className="itemOne">
-            <div className="itemTitle">{categoryName}</div>
+            <div className="itemTitle">{categoryObj[categoryName].title}</div>
             <div className="mb1">
-              {data[categoryName] &&
-              meta.filter(item => item.category === categoryName)
-              .reduce((acc, curr) => acc.includes([curr.unifiedName, curr.longName]) ? acc : [...acc, [curr.unifiedName, curr.longName]], [])
-              .map((item, index) => {
-                return data[categoryName][item[0]] && (
+              {categoryObj[categoryName].items.map((item, index) => {
+                const { unifiedName, longName } = item;
+
+                return data[categoryName] && data[categoryName][unifiedName] && (
                   <div key={index}>
-                    <span
-                      className="w50"
-                      style={{ overflowWrap: "break-word" }}
-                    >
-                      {item[1]}
+                    <span className="w50" style={{ overflowWrap: "break-word" }}>
+                      {longName}
                     </span>
                     :{" "}
-                    <span
-                      className="font500"
-                      style={{ overflowWrap: "break-word" }}
-                    >
-                      {data[categoryName][item[0]]}
+                    <span className="font500" style={{ overflowWrap: "break-word" }}>
+                      {data[categoryName][unifiedName]}
                     </span>
                   </div>
                 );
-                })}
+              })}
             </div>
           </div>
           <hr />
