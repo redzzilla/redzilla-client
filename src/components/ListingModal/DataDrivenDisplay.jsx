@@ -11,7 +11,10 @@ const DataDrivenDisplay = (props) => {
       obj[item.category] = { title: item.category, items: [] };
     }
     obj[item.category].items.push({
-      unifiedName: item.unifiedName,
+      unifiedName:
+        REACT_APP_API_DETAIL_VERSION == 1 ?
+          item.unifiedName :
+          item.standardName || item.longName,
       longName: item.longName
     });
     return obj;
