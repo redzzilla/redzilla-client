@@ -23,8 +23,8 @@ const ItemBubbleContent = (props) => {
             <img
               data-id={duplicatedItem.id}
               className="popImg"
-              src={isInfoOpen ? duplicatedItem.photoUrl : ""}
-              alt={`Listing ${duplicatedItem.id}`}
+              src={isInfoOpen ? process.env.REACT_APP_PHOTO_API + duplicatedItem.photoUri : ""}
+              alt={"Main View"}
             />
           </div>
           <div className="popDetail">
