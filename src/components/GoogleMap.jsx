@@ -3,7 +3,7 @@ import GoogleMapReact from "google-map-react";
 import { ItemBubble } from "./ItemBubble";
 import geoService from "../services/GeoService";
 
-const GoogleMap = ({ initialData, filterStatus, currentLocation }) => {
+const GoogleMap = ({ initialData, filterStatus, currentLocation, setMaps }) => {
   const [data, setData] = useState(initialData);
 
   const mergeVisibleArea = (oldData, newData) => {
@@ -58,6 +58,7 @@ const GoogleMap = ({ initialData, filterStatus, currentLocation }) => {
   };
 
   const handleApiLoaded = async (map, maps) => {
+    setMaps(maps);
     mergeDataFunction(map, maps);
     let marker = new maps.Marker({
       position: currentLocation,

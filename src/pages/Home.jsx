@@ -9,7 +9,6 @@ import SearchForm from "../components/SearchForm";
 import SaveSearch from "../components/SaveSearch";
 import Constant from "../Constant";
 import { useWindowSize } from "../hooks/useWindowSize";
-import reverse from "reverse-geocode";
 
 const checkFile = () => {
   try {
@@ -25,6 +24,7 @@ function Home() {
   const { state } = useLocation();
   const [{ user }] = useSession();
   const { width } = useWindowSize();
+  const [maps, setMaps] = useState(null);
 
   const [currentLocation, setCurrentLocation] = useState({
     lat: 32.727,
@@ -59,13 +59,28 @@ function Home() {
   }, []);
 
   useEffect(() => {
-    let zipcode = reverse.lookup(
-      currentLocation.lat,
-      currentLocation.lng,
-      "us"
-    ).zipcode;
-    setUserZip(zipcode);
-  }, [currentLocation]);
+    if(currentLocation != null && maps != null) {
+      const geocoder = new maps.Geocoder();
+      geocoder.geocode(
+        { location: { lat: currentLocation.lat, lng: currentLocation.lng } },
+        (results, status) => {
+          if (status === "OK") {
+            const addressComponents = results[0].address_components;
+            let zipcode = null;
+            for (let i = 0; i < addressComponents.length; i++) {
+              const types = addressComponents[i].types;
+              if (types.indexOf("postal_code") !== -1) {
+                zipcode = addressComponents[i].short_name;
+                break;
+              }
+            }
+            setUserZip(zipcode);
+          } else {
+            console.error("Geocode was not successful for the following reason:", status);
+          }
+        });
+      }
+  }, [currentLocation, maps]);
 
   useEffect(() => {
     if (typeof state?.searchIndex !== "undefined") {
@@ -112,6 +127,7 @@ function Home() {
               initialData={data}
               filterStatus={filterStatus}
               currentLocation={currentLocation}
+              setMaps={setMaps}
             />
           </div>
         </Fragment>
