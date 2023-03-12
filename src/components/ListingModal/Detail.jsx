@@ -23,7 +23,7 @@ const Detail = (props) => {
     const handleScroll = (e) => {
         setScrollTop(e.target.scrollTop);
     }
-    
+
     return (
         <div className='datailContainer'>
             { data && (
@@ -44,7 +44,7 @@ const Detail = (props) => {
                     <div className='itemMain'>
                         <div className='itemOne itemPrice'>
                             <div className='mb1'>
-                                <span className='mainPrice'>${numFormatter(data.Overview.OrigPrice)}</span>
+                                <span className='mainPrice'>${numFormatter(data.System.ListPrice)}</span>
                                 <span className='roomCounts font15'>
                                     {data.Layout.Beds || 0} bd | {data.Layout.FB || 0} ba | {numFormatter(data.Layout.EstSF) || 0} sqft
                                 </span>
@@ -55,10 +55,10 @@ const Detail = (props) => {
                             <div className='alignCenter mb1'>
                                 <GoPrimitiveDot color='red'/>
                                 <div className='fontBold'>
-                                    &nbsp; {data.System.SaleOrRent} 
-                                </div> 
+                                    &nbsp; {data.System.SaleOrRent}
+                                </div>
                                 <div>
-                                    &nbsp;|&nbsp;Zestimate <sup>@</sup>&nbsp;:<span className='fontBold'>&nbsp;${numFormatter(data.Overview.OrigPrice)}</span>
+                                    &nbsp;|&nbsp;Yestimate <sup>@</sup>&nbsp;:<span className='fontBold'>&nbsp;${numFormatter(data.System.ListPrice)}</span>
                                 </div>
                             </div>
                             <div className='alignCenter font14 mb2'>

@@ -112,7 +112,7 @@ const OverviewDetail = (props) => {
             <div className="blueBoldUnderline">Find a lender</div>
           </div>
           <div className="shortDes">
-            Zillow Group Marketplace, Inc. NMLS #1303160
+            Placeholder for Company Name, Lic# 000000000
           </div>
         </div>
         <div className="mb2 google-map">
