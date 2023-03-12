@@ -22,9 +22,10 @@ function useSearchService(filterState) {
           headers: {
             'Content-Type': 'application/json'
           },
-          body: JSON.stringify(
-            filterState
-          )
+          body: JSON.stringify({
+            ...filterState,
+            keywords: String(filterState.keywords)
+          })
         })
           .then(response => response.json())
           .then(data => { setData(data); })
