@@ -1,29 +1,18 @@
 import React, { useEffect, useState } from "react";
-import { styled } from "@mui/material/styles";
-import Tabs, { tabsClasses } from "@mui/material/Tabs";
-import Tab from "@mui/material/Tab";
-import Box from "@mui/material/Box";
+import { FiChevronRight, FiChevronLeft } from "react-icons/fi";
+import "./TabBar.scss"
 const meta = require("./metadata.json");
 
-const StyledTab = styled((props) => <Tab disableRipple {...props} />)(
-  ({ theme }) => ({
-    textTransform: "none",
-    fontWeight: theme.typography.fontWeightRegular,
-    fontSize: "15px",
-    color: "black",
-    padding: "3px 10px",
-    minWidth: "20px",
-    "&:hover": {
-      color: "#006aff",
-    },
-    "&.Mui-selected": {
-      color: "#006aff",
-    },
-    "&.Mui-focusVisible": {
-      backgroundColor: "rgba(100, 95, 228, 0.32)",
-    },
-  })
-);
+const StyledTab2 = (props) => {
+  return (
+    <>
+      <div
+        className={`tab ${props.active === props.id ? 'active' : ''}`}
+        onClick={props.onClick}
+
+      >{props.label}</div>
+    </>)
+};
 
 const TabBar = (props) => {
   const { scrollTop } = props;
@@ -38,15 +27,22 @@ const TabBar = (props) => {
         const eleTop = selEle.offsetTop - parentEle.offsetTop;
         if (eleTop >= scrollTop && eleTop <= scrollTop + 520) {
           setValue(i);
+          // console.log("VALUE IS : ", value);
           break;
         }
       }
     }
   }, [scrollTop]);
 
-  const handleChange = (event, newValue) => {
+  useEffect(() => {
+    const selEle = document.getElementsByClassName("tab active")[0];
+    selEle.scrollIntoView()
+  }, [value]);
+
+  const handleChange = (newValue) => {
     const parentEle = document.getElementsByClassName("detailMain")[0];
     const selEle = document.getElementsByClassName("detailItem")[newValue];
+    console.log("selected elem: ",selEle , newValue);
     const scrollTop = selEle.offsetTop - parentEle.offsetTop;
     parentEle.scroll({
       top: scrollTop,
@@ -64,28 +60,30 @@ const TabBar = (props) => {
   // }, [])
 
   return (
-    <Box
-      sx={{
-        [`& .${tabsClasses.scrollButtons}`]: {
-          "&.Mui-disabled": { opacity: 0.3 },
-        },
-      }}
-    >
+    <>
       <hr />
-      <Tabs
-       className="testing-class"
-        value={value}
-        onChange={handleChange}
-        variant="scrollable"
-        scrollButtons="auto"
-        allowScrollButtonsMobile
-      >
-        {catList.map((labelName) => (
-          <StyledTab label={labelName} key={labelName} />
-        ))}
-      </Tabs>
+
+      <div className="tabsContainer">
+        <FiChevronLeft></FiChevronLeft>
+
+        <div className="tabScroller">
+          <div className="tabs" >
+            {catList.map((labelName, index) => {
+              if (labelName) {
+                // console.log("index: ", index, "name: ", labelName );
+                return (
+                  <StyledTab2 label={labelName} key={index} id={index} active={value} Han  />
+                )
+              }
+            })}
+          </div>
+        </div>
+        <FiChevronRight ></FiChevronRight>
+
+      </div>
       <hr />
-    </Box>
+    </>
+
   );
 };
 
