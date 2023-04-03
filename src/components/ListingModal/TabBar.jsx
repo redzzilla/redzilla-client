@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import { FiChevronRight, FiChevronLeft } from "react-icons/fi";
 import "./TabBar.scss"
 const meta = require("./metadata.json");
@@ -14,7 +14,9 @@ const StyledTab2 = (props) => {
         className={`tab ${props.active === props.id ? 'active' : ''}`}
         onClick={handleClick}
 
-      >{props.label}</div>
+      ><span className="tabLabel">{props.label}</span>
+        <div className={`tabIndicator  ${props.active === props.id ? 'active' : ''}`} ></div>
+      </div>
     </>)
 };
 
@@ -31,7 +33,6 @@ const TabBar = (props) => {
         const eleTop = selEle.offsetTop - parentEle.offsetTop;
         if (eleTop >= scrollTop && eleTop <= scrollTop + 520) {
           setValue(i);
-          // console.log("VALUE IS : ", value);
           break;
         }
       }
@@ -42,18 +43,17 @@ const TabBar = (props) => {
     const parentEle = document.getElementsByClassName("tabScroller")[0];
     const selEle = document.getElementsByClassName("tab active")[0];
     const scrollTo = selEle.offsetLeft - parentEle.offsetLeft;
-    console.log(scrollTo,parentEle.offsetLeft );
+
     parentEle.scroll({
       left: scrollTo,
       behavior: "smooth",
     });
-    
+
   }, [value]);
 
   const handleChange = (newValue) => {
     const parentEle = document.getElementsByClassName("detailMain")[0];
     const selEle = document.getElementsByClassName("detailItem")[newValue];
-    console.log("selected elem: ",selEle , newValue);
     const scrollTop = selEle.offsetTop - parentEle.offsetTop;
     parentEle.scroll({
       top: scrollTop,
@@ -106,11 +106,12 @@ const TabBar = (props) => {
           <div className="tabs" >
             {catList.map((labelName, index) => {
               if (labelName) {
-                // console.log("index: ", index, "name: ", labelName );
                 return (
-                  <StyledTab2 label={labelName} key={index} id={index} active={value} onClick={handleChange}  />
+                  <StyledTab2 label={labelName} key={index} id={index} active={value} onClick={handleChange} />
                 )
               }
+              else return (<Fragment key={index}> </Fragment>)
+
             })}
           </div>
         </div>

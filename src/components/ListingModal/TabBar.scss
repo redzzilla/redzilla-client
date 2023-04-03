@@ -1,46 +1,56 @@
 .tab {
     display: flex;
+    flex-direction: column;
     align-items: center;
     text-transform: none;
     font-weight: 400;
     font-size: 15px;
     color: black;
-    padding: 3px 10px;
+    padding: 0px 10px;
     min-width: 20px;
     cursor: pointer;
-    border-width: 10px;
-    border-color: #006aff;
     height: 100%;
-    vertical-align: middle;
 
 }
 
 .tab:hover {
     color: #006aff;
-    border-bottom: #006aff;
-    border-width: 2px;
-
 
 }
 
 .tab.active {
     color: #006aff;
-    border-bottom: #006aff;
-    border-width: 2px;
+
+}
+
+.tabIndicator.active{
+    background-color: #1976d2;
+
+}
+.tabLabel{
+    flex-grow: 1;
+    vertical-align: middle;
+
+}
+
+.tabIndicator{
+    background-color: transparent;
+    height: 2px;
+    width: 100%;
+    border-radius: 15%;
 
 }
 
 .tabs {
-    display: flex;
+    display: inline-flex;
     min-width: fit-content;
     justify-content: space-around;
     height: 100%;
-
-
-
+    box-sizing: border-box;
 }
 
 .tabScroller {
+    overflow-y: hidden;
     overflow-x: scroll;
     scrollbar-width: 0;
     -ms-overflow-style: none;
