@@ -63,6 +63,29 @@ const TabBar = (props) => {
     setValue(newValue);
   };
 
+  function scrollLeft() {
+    const parentEle = document.getElementsByClassName("tabScroller")[0];
+    const scrollTo = parentEle.scrollLeft - 200;
+
+    parentEle.scroll({
+      left: scrollTo,
+      behavior: "smooth",
+    });
+
+  }
+
+  function scrollRight() {
+    const parentEle = document.getElementsByClassName("tabScroller")[0];
+    const scrollTo = parentEle.scrollLeft + 200;
+
+    parentEle.scroll({
+      left: scrollTo,
+      behavior: "smooth",
+    });
+
+
+  }
+
   const catList = meta.reduce((list, item) => list.includes(item.category) ? list : [...list, item.category], []);
 
   // const tabList = catList.reduce((tabList, category) => {
@@ -75,7 +98,9 @@ const TabBar = (props) => {
       <hr />
 
       <div className="tabsContainer">
-        <FiChevronLeft></FiChevronLeft>
+        <div className="scrollButtons" onClick={scrollLeft}>
+          <FiChevronLeft ></FiChevronLeft>
+        </div>
 
         <div className="tabScroller">
           <div className="tabs" >
@@ -89,8 +114,9 @@ const TabBar = (props) => {
             })}
           </div>
         </div>
-        <FiChevronRight ></FiChevronRight>
-
+        <div className="scrollButtons" onClick={scrollRight}>
+          <FiChevronRight  ></FiChevronRight>
+        </div>
       </div>
       <hr />
     </>
