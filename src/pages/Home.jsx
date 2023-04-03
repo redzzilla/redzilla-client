@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, Fragment } from "react";
 import { useLocation } from "react-router-dom";
-import { Fragment } from "react/cjs/react.production.min";
 import GoogleMap from "../components/GoogleMap";
 import Login from "../components/Login";
 import { useSearchService } from "../services/SearchService";

@@ -73,6 +73,7 @@ const TabBar = (props) => {
     >
       <hr />
       <Tabs
+       className="testing-class"
         value={value}
         onChange={handleChange}
         variant="scrollable"

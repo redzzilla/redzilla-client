@@ -1,6 +1,6 @@
 import React from 'react'
-import GoogleLogin from 'react-google-login';
-import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props'
+import { GoogleLogin } from '@leecheuk/react-google-login';
+import FacebookLogin from '@greatsumini/react-facebook-login';
 import { FaFacebook } from 'react-icons/fa';
 import { FcGoogle } from 'react-icons/fc';
 import { GetUserProfile, SaveUser } from '../../services/UserService';
