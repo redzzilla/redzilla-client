@@ -4,11 +4,15 @@ import "./TabBar.scss"
 const meta = require("./metadata.json");
 
 const StyledTab2 = (props) => {
+
+  function handleClick() {
+    props.onClick(props.id);
+  }
   return (
     <>
       <div
         className={`tab ${props.active === props.id ? 'active' : ''}`}
-        onClick={props.onClick}
+        onClick={handleClick}
 
       >{props.label}</div>
     </>)
@@ -35,8 +39,15 @@ const TabBar = (props) => {
   }, [scrollTop]);
 
   useEffect(() => {
+    const parentEle = document.getElementsByClassName("tabScroller")[0];
     const selEle = document.getElementsByClassName("tab active")[0];
-    selEle.scrollIntoView()
+    const scrollTo = selEle.offsetLeft - parentEle.offsetLeft;
+    console.log(scrollTo,parentEle.offsetLeft );
+    parentEle.scroll({
+      left: scrollTo,
+      behavior: "smooth",
+    });
+    
   }, [value]);
 
   const handleChange = (newValue) => {
@@ -72,7 +83,7 @@ const TabBar = (props) => {
               if (labelName) {
                 // console.log("index: ", index, "name: ", labelName );
                 return (
-                  <StyledTab2 label={labelName} key={index} id={index} active={value} Han  />
+                  <StyledTab2 label={labelName} key={index} id={index} active={value} onClick={handleChange}  />
                 )
               }
             })}

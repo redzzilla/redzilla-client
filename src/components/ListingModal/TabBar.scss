@@ -1,17 +1,25 @@
 .tab {
-
+    display: flex;
+    align-items: center;
     text-transform: none;
-    font-weight: regular;
+    font-weight: 400;
     font-size: 15px;
     color: black;
     padding: 3px 10px;
     min-width: 20px;
     cursor: pointer;
+    border-width: 10px;
+    border-color: #006aff;
+    height: 100%;
+    vertical-align: middle;
+
 }
 
 .tab:hover {
     color: #006aff;
     border-bottom: #006aff;
+    border-width: 2px;
+
 
 }
 
@@ -26,6 +34,7 @@
     display: flex;
     min-width: fit-content;
     justify-content: space-around;
+    height: 100%;
 
 
 
@@ -35,6 +44,7 @@
     overflow-x: scroll;
     scrollbar-width: 0;
     -ms-overflow-style: none;
+    height: 100%;
 
 }
 
@@ -43,9 +53,10 @@
     justify-content: space-around;
     align-items: center;
     height: 45px;
+    margin-bottom: 3px;
 
 }
 
 .tabScroller::-webkit-scrollbar {
-    //display: none;
+    display: none;
 }
