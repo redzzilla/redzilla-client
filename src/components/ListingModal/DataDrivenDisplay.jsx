@@ -12,7 +12,7 @@ const DataDrivenDisplay = (props) => {
     }
     obj[item.category].items.push({
       unifiedName:
-        process.env.REACT_APP_API_DETAIL_VERSION === 1 ?
+        process.env.REACT_APP_API_DETAIL_VERSION == 1 ?
           item.unifiedName :
           item.standardName || item.longName,
       longName: item.longName
