@@ -4,6 +4,8 @@ import { ItemBubble } from "./ItemBubble";
 import geoService from "../services/GeoService";
 
 const GoogleMap = ({ initialData, filterStatus, currentLocation, setMaps }) => {
+  console.log('currentLocation');
+  console.log(currentLocation);
   const [data, setData] = useState(initialData);
   const [zoomValue, setZoomValue] = useState(10);
   const mergeVisibleArea = (oldData, newData) => {

@@ -34,7 +34,7 @@ const SearchForm = (props) => {
           minHeight: '34px',
           height: '34px',
           textOverflow: "ellipsis",
-         // minWidth: "300px"
+          minWidth: "300px"
         }),
         valueContainer: (provided, state) => ({
           ...provided,
