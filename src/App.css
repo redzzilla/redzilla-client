@@ -4,7 +4,7 @@
 }
 .fillterAndSignIn{
     box-sizing: border-box;
- /*   position: absolute;*/
+    position: absolute;
     padding: 8px 20px;
     align-items: center;
     display: flex;

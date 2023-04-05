@@ -214,8 +214,8 @@ const calculateDistance = (lattitude1, longittude1,lattitude2,longittude2) =>
               zoomControl:false,
               scaleControl:false,
               disableDoubleClickZoom:false,
-              fullscreenControl:false,
-              gestureHandling: "greedy",
+              //fullscreenControl:false,
+              //gestureHandling: "greedy",
             }
           }
         yesIWantToUseGoogleMapApiInternals
