@@ -34,9 +34,6 @@ const ItemBubble = ({ item, duplicatedItems }) => {
   };
 
   const openInfo = (e) => {
-
-    console.log('openInfo');
-    console.log(isInfoClick);
     if (!isInfoClick) {
       if(e.clientX > 365)
         setPositionLeft((window.innerWidth-e.clientX) % 365 -335);
@@ -46,10 +43,7 @@ const ItemBubble = ({ item, duplicatedItems }) => {
     }
   };
   const pointInfo = (e) => {
-
     setIsInfoClick(true);
-    console.log('pointInfo');
-    console.log(isInfoClick);
     if(isInfoClick)
     {
       if(e.clientX > 365)
