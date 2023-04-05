@@ -143,7 +143,7 @@ const calculateDistance = (lattitude1, longittude1,lattitude2,longittude2) =>
 
       screenZoomX = screenZoomX >= screenZoomY ? screenZoomY: screenZoomX;
       console.log('screeenZoomX = '+ screenZoomX);
-      setZoomValue(map.zoom + (screenZoomX > 1.0 ? Math.round(Math.log2(screenZoomX)) : 0));
+      setZoomValue(map.zoom + (screenZoomX > 2.0 ? Math.round(Math.log2(screenZoomX)) : 0));
 
       const myObj = { ...filterStatus };
       delete myObj.keywords;
@@ -208,7 +208,16 @@ const calculateDistance = (lattitude1, longittude1,lattitude2,longittude2) =>
 
   return (
     data && (
-      <GoogleMapReact options={{zoomControl:false,scaleControl:false,disableDoubleClickZoom:false}}
+      <GoogleMapReact 
+        options={
+            {
+              zoomControl:false,
+              scaleControl:false,
+              disableDoubleClickZoom:false,
+              fullscreenControl:false,
+              gestureHandling: "greedy",
+            }
+          }
         yesIWantToUseGoogleMapApiInternals
         bootstrapURLKeys={{
           key: process.env.REACT_APP_GOOGLE_KEY,
