@@ -211,9 +211,9 @@ const calculateDistance = (lattitude1, longittude1,lattitude2,longittude2) =>
       <GoogleMapReact 
         options={
             {
-              zoomControl:false,
+              zoomControl:true,
               scaleControl:false,
-              disableDoubleClickZoom:false,
+              disableDoubleClickZoom:true,
               //fullscreenControl:false,
               //gestureHandling: "greedy",
             }
