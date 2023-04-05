@@ -88,7 +88,11 @@ function Home() {
     }
   }, [state?.searchIndex, user?.savedSearch]);
 
+
+
   const data = useSearchService(filterStatus);
+
+  console.log('LIMITED_MARK_COUNT' + process.env.REACT_APP_MARK_MAX);
 
   return (
     <div className="App">
@@ -120,9 +124,10 @@ function Home() {
         {width >= 770 && <Login />}
       </div>
 
-      {filterStatus.keywords && data && (
-        <Fragment>
-          <div style={{ height: "100vh", width: "100%" }}>
+
+     {filterStatus.keywords && data && (
+       <Fragment>
+           <div style={{ height: "100vh", width: "100%" }}>
             <GoogleMap
               initialData={data}
               filterStatus={filterStatus}

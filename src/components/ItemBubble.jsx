@@ -21,6 +21,7 @@ const ItemBubble = ({ item, duplicatedItems }) => {
   const modalRef = useRef(null);
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [selectedItem, setSelectedItem] = useState([]);
+  const [positionLeft, setPositionLeft] = useState(Number);
 
   const numFormatter = (num) => {
     if (num > 999 && num < 1000000) {
@@ -32,12 +33,20 @@ const ItemBubble = ({ item, duplicatedItems }) => {
     }
   };
 
-  const openInfo = () => {
+  const openInfo = (e) => {
+    if(e.clientX > 365)
+      setPositionLeft(window.innerWidth-e.clientX-365);
+    else
+      setPositionLeft(-e.clientX+50);    
     if (!isInfoClick) {
       setIsInfoOpen(true);
     }
   };
-  const pointInfo = () => {
+  const pointInfo = (e) => {
+    if(e.clientX > 365)
+      setPositionLeft(window.innerWidth-e.clientX-365);
+    else
+      setPositionLeft(-e.clientX+50);    
     setIsInfoClick(true);
     if (duplicatedItems.length === 1) {
       openModal(item)
@@ -85,7 +94,7 @@ const ItemBubble = ({ item, duplicatedItems }) => {
 
         <div
           className="popOutDiv"
-          style={{ display: isInfoClick || isInfoOpen ? "block" : "none" }}
+          style={{ left: positionLeft, display: isInfoClick || isInfoOpen ? "block" : "none" }}
         >
           <ItemBubbleContent
             openModal={openModal}
