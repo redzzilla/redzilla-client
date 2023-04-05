@@ -34,20 +34,29 @@ const ItemBubble = ({ item, duplicatedItems }) => {
   };
 
   const openInfo = (e) => {
-    if(e.clientX > 365)
-      setPositionLeft((window.innerWidth-e.clientX) % 365 -365);
-    else
-      setPositionLeft(-e.clientX+50);    
+
+    console.log('openInfo');
+    console.log(isInfoClick);
     if (!isInfoClick) {
+      if(e.clientX > 365)
+        setPositionLeft((window.innerWidth-e.clientX) % 365 -335);
+      else
+        setPositionLeft(-e.clientX+50);    
       setIsInfoOpen(true);
     }
   };
   const pointInfo = (e) => {
-    if(e.clientX > 365)
-      setPositionLeft((window.innerWidth-e.clientX) % 365 -365);
-    else
-      setPositionLeft(-e.clientX+50);    
+
     setIsInfoClick(true);
+    console.log('pointInfo');
+    console.log(isInfoClick);
+    if(isInfoClick)
+    {
+      if(e.clientX > 365)
+       setPositionLeft((window.innerWidth-e.clientX) % 365 -335);
+      else
+       setPositionLeft(-e.clientX+50);    
+    }
     if (duplicatedItems.length === 1) {
       openModal(item)
     }
