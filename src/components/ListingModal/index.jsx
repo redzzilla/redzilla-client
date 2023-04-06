@@ -31,11 +31,8 @@ const ListingModal = (props) => {
       <div className="modal">
         <div className="modalWrapper">
           <Gallery galleryData={galleryData} data={data} />
-          <Detail data={data} />
+          <Detail data={data} closeModal={closeModal} />
         </div>
-        <span className="closeWrapepr" onClick={closeModal}>
-          <FaTimes />
-        </span>
       </div>
     )
   );

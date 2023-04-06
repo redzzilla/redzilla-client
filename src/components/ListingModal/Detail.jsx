@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import SaveFavorite from '../SaveFavorite'
 import { GoPrimitiveDot } from 'react-icons/go';
-import { RiShareForwardLine } from 'react-icons/ri';
+import { RiShareForwardLine,RiArrowGoBackLine } from 'react-icons/ri';
 import { BsThreeDots } from 'react-icons/bs';
 import { AiFillDollarCircle } from 'react-icons/ai';
 import TabBar from './TabBar';
@@ -15,7 +15,7 @@ const numFormatter = num => {
 
 const Detail = (props) => {
     const {
-        data
+        data, closeModal
     } = props
 
     const [scrollTop, setScrollTop] = useState(0);
@@ -31,6 +31,9 @@ const Detail = (props) => {
                     <div className='itemHeader'>
                         <img src='/logo.png' className='modalLogo' alt=''/>
                         <div className='itemAction'>
+                            <span className='actionBtn' onClick={()=> closeModal()}>
+                                <RiArrowGoBackLine size='22'/>&nbsp;Back
+                            </span>
                             <SaveFavorite itemId={data.System.SystemID}/>
                             <span className='actionBtn' onClick={()=> alert('the Share Agent button was clicked!')}>
                                 <RiShareForwardLine size='22'/>&nbsp;Share
