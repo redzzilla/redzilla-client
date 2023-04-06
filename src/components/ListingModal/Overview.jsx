@@ -146,7 +146,6 @@ const OverviewDetail = (props) => {
               <Autocomplete
                 apiKey={process.env.REACT_APP_GOOGLE_KEY}
                 onPlaceSelected={(place) => {
-                  console.log(place);
                 }}
                 types={["(regions)"]}
                 className="nextInputBox inputBox"

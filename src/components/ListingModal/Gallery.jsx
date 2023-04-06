@@ -35,8 +35,6 @@ const Gallery = (props) => {
     });
     setImages(newArr);
   }, [galleryData]);
-  console.log('galleryData');
-  console.log(galleryData.photos.length);
   return (
     <div className="galleryContainer">
       {galleryData &&

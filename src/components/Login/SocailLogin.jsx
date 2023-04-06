@@ -38,7 +38,6 @@ const SocailLogin = () => {
     }
 
     const handleGoogleFailure = (result) => {
-        console.log(result)
     }
 
     const responseFacebook = (response) => {

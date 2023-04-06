@@ -32,9 +32,7 @@ const GoogleMap = ({ initialData, filterStatus, currentLocation, setMaps }) => {
   };
 
 function handleZoomChanged (map) {
-  console.log("handleZoomChanged=====");
   setZoomValue(map.zoom);
-  console.log(zoomValue);
 };
 
 useEffect(() => {
@@ -111,7 +109,6 @@ const calculateDistance = (lattitude1, longittude1,lattitude2,longittude2) =>
         markMax.push({latitude:data[i].latitude,longittude:data[i].longitude});
       }
     }
-    console.log(markMax);
     //get max latitude
     let region = [];
     let latitudeRegion = 1000, longitudeRegion=1000;
@@ -133,8 +130,6 @@ const calculateDistance = (lattitude1, longittude1,lattitude2,longittude2) =>
 
   const mergeDataFunction = (map, maps) => {
     let bounds = new maps.LatLngBounds();
-    console.log("mergeDataFunction");
-    console.log(data.length);
     for (let i = 0; i < data.length; ++i) {
       if (!data[i].latitude || !data[i].longitude) continue;
       let position = new maps.LatLng(data[i].latitude, data[i].longitude);
@@ -161,7 +156,6 @@ const calculateDistance = (lattitude1, longittude1,lattitude2,longittude2) =>
 //    }
 
       screenZoomX = screenZoomX >= screenZoomY ? screenZoomY: screenZoomX;
-      console.log('screeenZoomX = '+ screenZoomX);
       setZoomValue(map.zoom + (screenZoomX > 2.0 ? Math.round(Math.log2(screenZoomX)) : 0));
 
       const myObj = { ...filterStatus };
@@ -235,7 +229,7 @@ const calculateDistance = (lattitude1, longittude1,lattitude2,longittude2) =>
               scaleControl:false,
               disableDoubleClickZoom:true,
               //fullscreenControl:false,
-              //gestureHandling: "greedy",
+              gestureHandling: "greedy",
             }
           }
         yesIWantToUseGoogleMapApiInternals

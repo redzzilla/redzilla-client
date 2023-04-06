@@ -13,21 +13,13 @@ const ListingModal = (props) => {
 
   useEffect(() => {
     async function fetchData() {
-      console.log("popup select================================");
-      console.log('itemId =>'+itemId);
       let url = detailEndpoint(itemId);
-      console.log(url);
       let res = await fetch(url);
       let result = await res.json();
-      console.log(result);
       setData(result);
-      console.log("popup select result================================");
       url = result._PhotoGalleryURL;
-      console.log(url);
       res = await fetch(url);
-      console.log(res);
       result = await res.json();
-      console.log(result);
       setGalleryData(result);
     }
     fetchData();
