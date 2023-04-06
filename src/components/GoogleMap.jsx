@@ -1,13 +1,22 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import GoogleMapReact from "google-map-react";
 import { ItemBubble } from "./ItemBubble";
 import geoService from "../services/GeoService";
 
 const GoogleMap = ({ initialData, filterStatus, currentLocation, setMaps }) => {
-  console.log('currentLocation');
-  console.log(currentLocation);
   const [data, setData] = useState(initialData);
   const [zoomValue, setZoomValue] = useState(10);
+
+  useEffect(() => {
+    if (!window.prevInitialData)
+      window.prevInitialData = "";
+    let currentStr = JSON.stringify(initialData);
+    if (window.prevInitialData !== currentStr) {
+      window.prevInitialData = currentStr;
+      window.modify = true;
+    }
+  }, []);
+
   const mergeVisibleArea = (oldData, newData) => {
     let merge = [];
     let oldKeys = new Set(oldData.map((item) => item.id));
@@ -27,6 +36,10 @@ function handleZoomChanged (map) {
   setZoomValue(map.zoom);
   console.log(zoomValue);
 };
+
+useEffect(() => {
+
+}, [])
 
 const calculateDistance = (lattitude1, longittude1,lattitude2,longittude2) =>
 {
@@ -135,12 +148,16 @@ const calculateDistance = (lattitude1, longittude1,lattitude2,longittude2) =>
       let screenZoomY = 1;
 //    if(data.length >= process.env.REACT_APP_MARK_MAX)
 //    {
+        if(window.modify)
+        {
           let region = markRegion(bounds);
+          window.modify = false;
           if(region[0] !== 1000 && region[1] !== 1000)
           {
             screenZoomX = Math.abs((ne.lat() - sw.lat()) / region[0]);
             screenZoomY = Math.abs((ne.lng() - sw.lng()) / region[1]);
-          } 
+          }
+        }   
 //    }
 
       screenZoomX = screenZoomX >= screenZoomY ? screenZoomY: screenZoomX;
@@ -207,6 +224,7 @@ const calculateDistance = (lattitude1, longittude1,lattitude2,longittude2) =>
     bermudaTriangle.setMap(map);
     //map.fitBounds(bounds);
   };
+ 
 
   return (
     data && (

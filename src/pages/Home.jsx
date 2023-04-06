@@ -88,11 +88,9 @@ function Home() {
     }
   }, [state?.searchIndex, user?.savedSearch]);
 
-
-
   const data = useSearchService(filterStatus);
 
-  console.log('LIMITED_MARK_COUNT' + process.env.REACT_APP_MARK_MAX);
+  console.log('LIMITED_MARK_COUNT ' + process.env.REACT_APP_MARK_MAX);
 
   return (
     <div className="App">
