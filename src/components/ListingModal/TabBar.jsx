@@ -1,29 +1,24 @@
-import React, { useEffect, useState } from "react";
-import { styled } from "@mui/material/styles";
-import Tabs, { tabsClasses } from "@mui/material/Tabs";
-import Tab from "@mui/material/Tab";
-import Box from "@mui/material/Box";
+import React, { Fragment, useEffect, useState } from "react";
+import { FiChevronRight, FiChevronLeft } from "react-icons/fi";
+import "./TabBar.scss"
 const meta = require("./metadata.json");
 
-const StyledTab = styled((props) => <Tab disableRipple {...props} />)(
-  ({ theme }) => ({
-    textTransform: "none",
-    fontWeight: theme.typography.fontWeightRegular,
-    fontSize: "15px",
-    color: "black",
-    padding: "3px 10px",
-    minWidth: "20px",
-    "&:hover": {
-      color: "#006aff",
-    },
-    "&.Mui-selected": {
-      color: "#006aff",
-    },
-    "&.Mui-focusVisible": {
-      backgroundColor: "rgba(100, 95, 228, 0.32)",
-    },
-  })
-);
+const StyledTab2 = (props) => {
+
+  function handleClick() {
+    props.onClick(props.id);
+  }
+  return (
+    <>
+      <div
+        className={`tab ${props.active === props.id ? 'active' : ''}`}
+        onClick={handleClick}
+
+      ><span className="tabLabel">{props.label}</span>
+        <div className={`tabIndicator  ${props.active === props.id ? 'active' : ''}`} ></div>
+      </div>
+    </>)
+};
 
 const TabBar = (props) => {
   const { scrollTop } = props;
@@ -44,7 +39,19 @@ const TabBar = (props) => {
     }
   }, [scrollTop]);
 
-  const handleChange = (event, newValue) => {
+  useEffect(() => {
+    const parentEle = document.getElementsByClassName("tabScroller")[0];
+    const selEle = document.getElementsByClassName("tab active")[0];
+    const scrollTo = selEle.offsetLeft - parentEle.offsetLeft;
+
+    parentEle.scroll({
+      left: scrollTo,
+      behavior: "smooth",
+    });
+
+  }, [value]);
+
+  const handleChange = (newValue) => {
     const parentEle = document.getElementsByClassName("detailMain")[0];
     const selEle = document.getElementsByClassName("detailItem")[newValue];
     const scrollTop = selEle.offsetTop - parentEle.offsetTop;
@@ -56,6 +63,29 @@ const TabBar = (props) => {
     setValue(newValue);
   };
 
+  function scrollLeft() {
+    const parentEle = document.getElementsByClassName("tabScroller")[0];
+    const scrollTo = parentEle.scrollLeft - 200;
+
+    parentEle.scroll({
+      left: scrollTo,
+      behavior: "smooth",
+    });
+
+  }
+
+  function scrollRight() {
+    const parentEle = document.getElementsByClassName("tabScroller")[0];
+    const scrollTo = parentEle.scrollLeft + 200;
+
+    parentEle.scroll({
+      left: scrollTo,
+      behavior: "smooth",
+    });
+
+
+  }
+
   const catList = meta.reduce((list, item) => list.includes(item.category) ? list : [...list, item.category], []);
 
   // const tabList = catList.reduce((tabList, category) => {
@@ -64,27 +94,34 @@ const TabBar = (props) => {
   // }, [])
 
   return (
-    <Box
-      sx={{
-        [`& .${tabsClasses.scrollButtons}`]: {
-          "&.Mui-disabled": { opacity: 0.3 },
-        },
-      }}
-    >
+    <>
       <hr />
-      <Tabs
-        value={value}
-        onChange={handleChange}
-        variant="scrollable"
-        scrollButtons="auto"
-        allowScrollButtonsMobile
-      >
-        {catList.map((labelName) => (
-          <StyledTab label={labelName} key={labelName} />
-        ))}
-      </Tabs>
+
+      <div className="tabsContainer">
+        <div className="scrollButtons" onClick={scrollLeft}>
+          <FiChevronLeft ></FiChevronLeft>
+        </div>
+
+        <div className="tabScroller">
+          <div className="tabs" >
+            {catList.map((labelName, index) => {
+              if (labelName) {
+                return (
+                  <StyledTab2 label={labelName} key={index} id={index} active={value} onClick={handleChange} />
+                )
+              }
+              else return (<Fragment key={index}> </Fragment>)
+
+            })}
+          </div>
+        </div>
+        <div className="scrollButtons" onClick={scrollRight}>
+          <FiChevronRight  ></FiChevronRight>
+        </div>
+      </div>
       <hr />
-    </Box>
+    </>
+
   );
 };
 

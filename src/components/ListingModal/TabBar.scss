@@ -1,0 +1,84 @@
+.tab {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-transform: none;
+    font-weight: 400;
+    font-size: 15px;
+    color: black;
+    padding: 0px 10px;
+    min-width: 20px;
+    cursor: pointer;
+    height: 100%;
+
+}
+
+.tab:hover {
+    color: #006aff;
+
+}
+
+.tab.active {
+    color: #006aff;
+
+}
+
+.tabIndicator.active {
+    background-color: #1976d2;
+
+}
+
+.tabLabel {
+    display: inline-flex;
+    align-items: center;
+    flex-grow: 1;
+    vertical-align: middle;
+
+}
+
+.tabIndicator {
+    background-color: transparent;
+    height: 2px;
+    width: 100%;
+    border-radius: 15%;
+
+}
+
+.tabs {
+    display: inline-flex;
+    min-width: fit-content;
+    justify-content: space-around;
+    height: 100%;
+    box-sizing: border-box;
+}
+
+.tabScroller {
+    overflow-y: hidden;
+    overflow-x: scroll;
+    scrollbar-width: 0;
+    -ms-overflow-style: none;
+    height: 100%;
+
+}
+
+.tabsContainer {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    height: 45px;
+    margin-bottom: 3px;
+
+}
+
+.tabScroller::-webkit-scrollbar {
+    display: none;
+}
+
+.scrollButtons {
+    cursor: pointer;
+    padding: 6px 0;
+    height: 100%;
+    display: flex;
+    align-items: center;
+
+}
