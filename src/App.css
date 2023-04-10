@@ -369,12 +369,21 @@ input[type="radio"]{
 .App div div div div .gm-style div .gmnoprint.gm-bundled-control.gm-bundled-control-on-bottom .gmnoprint {
     top: -90px !important; 
 }
-.App div div div div .gm-style div div .gmnoprint.gm-style-cc div span {
-    display: none;
+.App div div div div .gm-style div div .gmnoprint .gm-style-cc div button {
+    display: none !important;
+}
+.App div div div div .gm-style div div .gmnoprint .gm-style-cc div span {
+    display: none !important;
 }
 .App div div div div .gm-style div div .gmnoprint.gm-style-cc div a {
     display: none;
 }
+/*.App div div div div .gm-style div div .gmnoprint.gm-style-cc div span {
+    display: none;
+}
+
+
+*/
 @media (max-width: 400px){
     .mobileColum{
         flex-direction: column;
