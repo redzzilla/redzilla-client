@@ -119,9 +119,10 @@ function Home() {
         {width >= 770 && <Login />}
       </div>
 
-      {filterStatus.keywords && data && (
-        <Fragment>
-          <div style={{ height: "100vh", width: "100%" }}>
+
+     {filterStatus.keywords && data && (
+       <Fragment>
+           <div style={{ height: "100vh", width: "100%" }}>
             <GoogleMap
               initialData={data}
               filterStatus={filterStatus}

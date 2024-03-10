@@ -17,7 +17,6 @@ const ListingModal = (props) => {
       let res = await fetch(url);
       let result = await res.json();
       setData(result);
-
       url = result._PhotoGalleryURL;
       res = await fetch(url);
       result = await res.json();
@@ -32,11 +31,8 @@ const ListingModal = (props) => {
       <div className="modal">
         <div className="modalWrapper">
           <Gallery galleryData={galleryData} data={data} />
-          <Detail data={data} />
+          <Detail data={data} closeModal={closeModal} />
         </div>
-        <span className="closeWrapepr" onClick={closeModal}>
-          <FaTimes />
-        </span>
       </div>
     )
   );
